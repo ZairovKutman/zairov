@@ -1,0 +1,90 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="cases">
+  <div class="container">
+    <p class="section__eyebrow">{t.cases.eyebrow}</p>
+    <h2 class="section__title">{t.cases.title}</h2>
+    <p class="section__lead">{t.cases.lead}</p>
+    <div class="cases">
+      {
+        t.cases.items.map((item) => (
+          <article class="case">
+            <h3>{item.name}</h3>
+            <p>{item.text}</p>
+            {item.url ? (
+              <a class="case__link" href={item.url} target="_blank" rel="noopener noreferrer">
+                {item.url.replace(/^https?:\/\//, '')}
+              </a>
+            ) : (
+              <span class="case__meta">{t.cases.internal}</span>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .case {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+    padding: 1.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    min-height: 11rem;
+    transition: border-color 200ms var(--ease-out);
+  }
+
+  .case:hover {
+    border-color: rgba(61, 143, 173, 0.4);
+  }
+
+  .case h3 {
+    font-size: 1.25rem;
+  }
+
+  .case p {
+    color: var(--color-text-muted);
+  }
+
+  .case__link {
+    margin-top: auto;
+    color: var(--color-accent);
+    font-weight: 600;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+  }
+
+  .case__link:hover {
+    border-bottom-color: currentColor;
+  }
+
+  .case__meta {
+    margin-top: auto;
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .cases {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

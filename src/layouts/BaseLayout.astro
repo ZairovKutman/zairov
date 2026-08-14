@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../i18n';
+import { getDictionary, locales } from '../i18n';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Products from '../components/Products.astro';
+import Values from '../components/Values.astro';
+import Expertise from '../components/Expertise.astro';
+import ForWhom from '../components/ForWhom.astro';
+import Cases from '../components/Cases.astro';
+import Process from '../components/Process.astro';
+import About from '../components/About.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const site = Astro.site ?? new URL('https://zairovkutman.github.io');
+const canonical = new URL(Astro.url.pathname, site);
+const basePath = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const localeHref = (l: Locale) =>
+  l === 'ru' ? new URL(basePath, site).href : new URL(`${basePath}${l}/`, site).href;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => <link rel="alternate" hreflang={l} href={localeHref(l)} />)}
+    <link rel="alternate" hreflang="x-default" href={localeHref('ru')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(`${basePath}og.svg`, site).href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#0b0f14" />
+    <link rel="icon" href={`${basePath}favicon.svg`} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header locale={locale} t={t} />
+    <main>
+      <Hero t={t} />
+      <Products t={t} />
+      <Values t={t} />
+      <Expertise t={t} />
+      <ForWhom t={t} />
+      <Cases t={t} />
+      <Process t={t} />
+      <About t={t} />
+      <ContactForm locale={locale} t={t} />
+    </main>
+    <Footer locale={locale} t={t} />
+  </body>
+</html>

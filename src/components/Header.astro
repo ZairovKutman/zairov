@@ -1,0 +1,284 @@
+---
+import type { Dictionary, Locale } from '../i18n';
+import { localizePath } from '../i18n';
+import Logo from './Logo.astro';
+import LangSwitcher from './LangSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+  t: Dictionary;
+}
+
+const { locale, t } = Astro.props;
+const home = `${import.meta.env.BASE_URL.replace(/\/$/, '')}${localizePath(locale)}`;
+
+const links = [
+  { href: '#products', label: t.nav.products },
+  { href: '#expertise', label: t.nav.expertise },
+  { href: '#cases', label: t.nav.cases },
+  { href: '#about', label: t.nav.about },
+  { href: '#contact', label: t.nav.contact },
+];
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__brand" href={home} aria-label="zairov home">
+      <Logo class="header__logo-desktop" />
+      <Logo class="header__logo-mobile" variant="mark" />
+    </a>
+
+    <nav class="header__nav" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a class="header__link" href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="header__actions">
+      <LangSwitcher locale={locale} />
+      <a class="btn btn--primary header__cta" href="#contact">{t.nav.contact}</a>
+      <button
+        class="header__menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-menu-toggle
+      >
+        <span class="sr-only" data-menu-label-open>{t.nav.menu}</span>
+        <span class="sr-only" data-menu-label-close hidden>{t.nav.close}</span>
+        <span class="header__menu-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="header__drawer" id="mobile-nav" hidden data-menu-panel>
+    <div class="container">
+      <nav class="header__drawer-nav" aria-label="Mobile">
+        {
+          links.map((link) => (
+            <a class="header__drawer-link" href={link.href} data-menu-close>
+              {link.label}
+            </a>
+          ))
+        }
+        <a class="btn btn--primary header__drawer-cta" href="#contact" data-menu-close>
+          {t.nav.contact}
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const panel = document.querySelector('[data-menu-panel]');
+  const labelOpen = document.querySelector('[data-menu-label-open]');
+  const labelClose = document.querySelector('[data-menu-label-close]');
+
+  if (toggle instanceof HTMLButtonElement && panel instanceof HTMLElement) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+      toggle.classList.toggle('is-open', open);
+      if (labelOpen instanceof HTMLElement) labelOpen.hidden = open;
+      if (labelClose instanceof HTMLElement) labelClose.hidden = !open;
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    panel.querySelectorAll('[data-menu-close]').forEach((el) => {
+      el.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 768px)').matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(11, 15, 20, 0.86);
+    backdrop-filter: blur(14px);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: var(--header-h);
+  }
+
+  .header__brand {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header__brand :global(.header__logo-desktop) {
+    display: none;
+  }
+
+  .header__brand :global(.header__logo-mobile) {
+    display: block;
+  }
+
+  .header__nav {
+    display: none;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .header__link {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 160ms var(--ease-out);
+  }
+
+  .header__link:hover {
+    color: var(--color-text);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .header__cta {
+    display: none;
+    min-height: 2.5rem;
+    padding-inline: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .header__menu-btn {
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.65rem;
+    background: transparent;
+    display: inline-grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .header__menu-icon,
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    display: block;
+    width: 1.1rem;
+    height: 1.5px;
+    background: var(--color-text);
+    position: relative;
+    transition: transform 180ms var(--ease-out), opacity 180ms var(--ease-out);
+  }
+
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .header__menu-icon::before {
+    top: -5px;
+  }
+
+  .header__menu-icon::after {
+    top: 5px;
+  }
+
+  .header__menu-btn.is-open .header__menu-icon {
+    background: transparent;
+  }
+
+  .header__menu-btn.is-open .header__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .header__menu-btn.is-open .header__menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .header__drawer {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-elevated);
+  }
+
+  .header__drawer-nav {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.5rem 0 1.25rem;
+  }
+
+  .header__drawer-link {
+    padding: 0.9rem 0.15rem;
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .header__drawer-cta {
+    margin-top: 0.85rem;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .header__brand :global(.header__logo-desktop) {
+      display: block;
+    }
+
+    .header__brand :global(.header__logo-mobile) {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .header__nav {
+      display: flex;
+      gap: 0.85rem;
+    }
+
+    .header__link {
+      font-size: 0.88rem;
+    }
+
+    .header__menu-btn,
+    .header__drawer {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header__nav {
+      gap: 1.25rem;
+    }
+
+    .header__link {
+      font-size: 0.95rem;
+    }
+
+    .header__cta {
+      display: inline-flex;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="process">
+  <div class="container">
+    <p class="section__eyebrow">{t.process.eyebrow}</p>
+    <h2 class="section__title">{t.process.title}</h2>
+    <ol class="process">
+      {
+        t.process.steps.map((step, index) => (
+          <li class="process__step">
+            <span class="process__num">{index + 1}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .process__step:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__num {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .process__step h3 {
+    margin-bottom: 0.3rem;
+    font-size: 1.15rem;
+  }
+
+  .process__step p {
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 900px) {
+    .process {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .process__step {
+      grid-template-columns: 1fr;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      min-height: 100%;
+    }
+
+    .process__step:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+  }
+</style>

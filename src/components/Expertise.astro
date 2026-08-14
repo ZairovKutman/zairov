@@ -1,0 +1,73 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="expertise">
+  <div class="container">
+    <p class="section__eyebrow">{t.expertise.eyebrow}</p>
+    <h2 class="section__title">{t.expertise.title}</h2>
+    <p class="section__lead">{t.expertise.lead}</p>
+    <div class="expertise">
+      {
+        t.expertise.items.map((item, index) => (
+          <article class="expertise__item">
+            <span class="expertise__index">0{index + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .expertise {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .expertise__item {
+    display: grid;
+    gap: 0.45rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .expertise__item:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .expertise__index {
+    font-family: var(--font-display);
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .expertise__item h3 {
+    font-size: 1.3rem;
+  }
+
+  .expertise__item p {
+    color: var(--color-text-muted);
+    max-width: 36rem;
+  }
+
+  @media (min-width: 900px) {
+    .expertise {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2rem;
+    }
+
+    .expertise__item:nth-child(2) {
+      border-top: 1px solid var(--color-border);
+    }
+  }
+</style>

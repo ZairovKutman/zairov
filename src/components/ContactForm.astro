@@ -1,0 +1,225 @@
+---
+import type { Dictionary, Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  t: Dictionary;
+}
+
+const { locale, t } = Astro.props;
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+---
+
+<section class="section" id="contact">
+  <div class="container contact">
+    <div>
+      <p class="section__eyebrow">{t.form.eyebrow}</p>
+      <h2 class="section__title">{t.form.title}</h2>
+      <p class="section__lead">{t.form.lead}</p>
+    </div>
+
+    <form class="form" data-contact-form novalidate>
+      <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <input type="hidden" name="locale" value={locale} />
+
+      <label class="form__field">
+        <span>{t.form.name}</span>
+        <input name="name" type="text" required maxlength="80" placeholder={t.form.namePlaceholder} />
+      </label>
+
+      <label class="form__field">
+        <span>{t.form.sector}</span>
+        <select name="sector" required>
+          <option value="private">{t.form.sectorPrivate}</option>
+          <option value="gov">{t.form.sectorGov}</option>
+          <option value="other">{t.form.sectorOther}</option>
+        </select>
+      </label>
+
+      <label class="form__field">
+        <span>{t.form.interest}</span>
+        <select name="interest" required>
+          <option value="turnkey">{t.form.interestTurnkey}</option>
+          <option value="landing">{t.form.interestLanding}</option>
+          <option value="ecommerce">{t.form.interestEcommerce}</option>
+          <option value="aibots">{t.form.interestAibots}</option>
+          <option value="automation">{t.form.interestAutomation}</option>
+          <option value="other">{t.form.interestOther}</option>
+        </select>
+      </label>
+
+      <label class="form__field">
+        <span>{t.form.contact}</span>
+        <input name="contact" type="text" required maxlength="80" placeholder={t.form.contactPlaceholder} />
+      </label>
+
+      <label class="form__field form__field--full">
+        <span>{t.form.message}</span>
+        <textarea name="message" rows="4" required maxlength="2000" placeholder={t.form.messagePlaceholder}></textarea>
+      </label>
+
+      <div class="form__actions">
+        <button class="btn btn--primary" type="submit" data-submit>{t.form.submit}</button>
+        <p class="form__status" data-status role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script
+  define:vars={{
+    endpoint,
+    successText: t.form.success,
+    errorText: t.form.error,
+    sendingText: t.form.sending,
+    submitText: t.form.submit,
+  }}
+>
+  const form = document.querySelector('[data-contact-form]');
+  if (!(form instanceof HTMLFormElement)) {
+    // no-op
+  } else {
+    const status = form.querySelector('[data-status]');
+    const submit = form.querySelector('[data-submit]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(status instanceof HTMLElement) || !(submit instanceof HTMLButtonElement)) return;
+
+      const data = new FormData(form);
+      if (String(data.get('company') || '').trim()) {
+        status.textContent = successText;
+        status.dataset.state = 'ok';
+        form.reset();
+        return;
+      }
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      if (!endpoint) {
+        status.textContent = errorText;
+        status.dataset.state = 'error';
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = sendingText;
+      status.textContent = '';
+      status.dataset.state = '';
+
+      try {
+        const payload = {
+          name: String(data.get('name') || '').trim(),
+          sector: String(data.get('sector') || '').trim(),
+          interest: String(data.get('interest') || '').trim(),
+          contact: String(data.get('contact') || '').trim(),
+          message: String(data.get('message') || '').trim(),
+          locale: String(data.get('locale') || '').trim(),
+        };
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('fail');
+        status.textContent = successText;
+        status.dataset.state = 'ok';
+        form.reset();
+      } catch {
+        status.textContent = errorText;
+        status.dataset.state = 'error';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = submitText;
+      }
+    });
+  }
+</script>
+
+<style>
+  .contact {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .form {
+    display: grid;
+    gap: 1rem;
+    padding: 1.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: rgba(18, 24, 33, 0.85);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .form__field {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .form__field span {
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .form__field input,
+  .form__field select,
+  .form__field textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    padding: 0.8rem 0.9rem;
+    outline: none;
+  }
+
+  .form__field input:focus,
+  .form__field select:focus,
+  .form__field textarea:focus {
+    border-color: rgba(61, 143, 173, 0.7);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+
+  .form__actions {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .form__status[data-state='ok'] {
+    color: var(--color-success);
+  }
+
+  .form__status[data-state='error'] {
+    color: #f0a0a0;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+
+  @media (min-width: 768px) {
+    .form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form__field--full,
+    .form__actions {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .contact {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+</style>

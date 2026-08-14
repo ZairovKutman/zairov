@@ -1,0 +1,73 @@
+---
+import type { Locale } from '../i18n';
+import { localizePath } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const languages: { code: Locale; label: string }[] = [
+  { code: 'ru', label: 'RU' },
+  { code: 'ky', label: 'KY' },
+  { code: 'en', label: 'EN' },
+];
+---
+
+<nav class="lang" aria-label="Language" data-lang-switcher>
+  {
+    languages.map((lang) => (
+      <a
+        class:list={['lang__link', { 'is-active': lang.code === locale }]}
+        href={`${base}${localizePath(lang.code)}`}
+        hreflang={lang.code}
+        data-lang-href={`${base}${localizePath(lang.code)}`}
+        aria-current={lang.code === locale ? 'page' : undefined}
+      >
+        {lang.label}
+      </a>
+    ))
+  }
+</nav>
+
+<script>
+  const root = document.querySelector('[data-lang-switcher]');
+  if (root) {
+    const hash = window.location.hash;
+    if (hash) {
+      root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((a) => {
+        a.href = `${a.dataset.langHref}${hash}`;
+      });
+    }
+  }
+</script>
+
+<style>
+  .lang {
+    display: inline-flex;
+    gap: 0.15rem;
+    padding: 0.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .lang__link {
+    min-width: 2.4rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: 999px;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .lang__link.is-active,
+  .lang__link:hover {
+    color: var(--color-text);
+    background: var(--color-accent-soft);
+  }
+</style>

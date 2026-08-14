@@ -1,0 +1,82 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+const [featured, ...rest] = t.products.items;
+---
+
+<section class="section" id="products">
+  <div class="container">
+    <p class="section__eyebrow">{t.products.eyebrow}</p>
+    <h2 class="section__title">{t.products.title}</h2>
+    <p class="section__lead">{t.products.lead}</p>
+    <div class="products">
+      <article class="product product--featured">
+        <h3>{featured.title}</h3>
+        <p>{featured.text}</p>
+      </article>
+      {
+        rest.map((item) => (
+          <article class="product">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .products {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .product {
+    padding: 1.4rem 1.3rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent);
+    transition:
+      border-color 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
+  }
+
+  .product:hover {
+    border-color: rgba(61, 143, 173, 0.45);
+    transform: translateY(-2px);
+  }
+
+  .product--featured {
+    background: linear-gradient(135deg, rgba(61, 143, 173, 0.14), rgba(255, 255, 255, 0.02));
+  }
+
+  .product h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .product--featured h3 {
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+  }
+
+  .product p {
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product--featured {
+      grid-column: 1 / -1;
+      padding: 1.75rem 1.6rem;
+    }
+  }
+</style>

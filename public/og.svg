@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0b0f14"/>
+  <circle cx="980" cy="120" r="280" fill="#3d8fad" opacity="0.22"/>
+  <g fill="#e8eef6" transform="translate(108 168) scale(5.4)">
+    <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
+  </g>
+  <text x="120" y="480" fill="#e8eef6" font-family="Syne, Avenir Next, Segoe UI, sans-serif" font-size="88" font-weight="700" letter-spacing="4">zairov</text>
+  <text x="120" y="536" fill="#9aabbe" font-family="Figtree, Segoe UI, sans-serif" font-size="30">сайты и IT-решения под ключ</text>
+</svg>

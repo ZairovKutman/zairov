@@ -1,0 +1,102 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container hero__content">
+    <h1 class="hero__title">{t.hero.title}</h1>
+    <p class="hero__subtitle">{t.hero.subtitle}</p>
+    <p class="hero__trust">{t.hero.trust}</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#contact">{t.hero.ctaPrimary}</a>
+      <a class="btn btn--ghost" href="#cases">{t.hero.ctaSecondary}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100svh - var(--header-h));
+    display: grid;
+    align-items: center;
+    padding-block: clamp(3rem, 8vw, 6.5rem);
+    overflow: hidden;
+    scroll-margin-top: var(--header-h);
+  }
+
+  .hero__glow {
+    position: absolute;
+    inset: 8% -18% auto 28%;
+    height: min(28rem, 70%);
+    background:
+      radial-gradient(circle at 30% 40%, rgba(61, 143, 173, 0.32), transparent 58%),
+      radial-gradient(circle at 80% 20%, rgba(232, 238, 246, 0.06), transparent 45%);
+    filter: blur(10px);
+    pointer-events: none;
+    animation: drift 14s var(--ease-out) infinite alternate;
+  }
+
+  .hero__content {
+    position: relative;
+    max-width: 46rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.7rem, 4.2vw, 3rem);
+    max-width: 16ch;
+    margin-bottom: 1.1rem;
+    animation: rise 800ms var(--ease-out) 80ms both;
+  }
+
+  .hero__subtitle {
+    max-width: 38rem;
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    margin-bottom: 1rem;
+    animation: rise 850ms var(--ease-out) 120ms both;
+  }
+
+  .hero__trust {
+    display: inline-block;
+    margin-bottom: 1.85rem;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    animation: rise 900ms var(--ease-out) 160ms both;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    animation: rise 950ms var(--ease-out) 200ms both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-3%, -2%, 0);
+    }
+  }
+</style>

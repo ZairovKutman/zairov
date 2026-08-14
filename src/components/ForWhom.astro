@@ -1,0 +1,56 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="for-whom">
+  <div class="container">
+    <p class="section__eyebrow">{t.forWhom.eyebrow}</p>
+    <h2 class="section__title">{t.forWhom.title}</h2>
+    <p class="section__lead">{t.forWhom.lead}</p>
+    <div class="forwhom">
+      <article class="forwhom__card">
+        <h3>{t.forWhom.privateTitle}</h3>
+        <p>{t.forWhom.privateText}</p>
+      </article>
+      <article class="forwhom__card">
+        <h3>{t.forWhom.govTitle}</h3>
+        <p>{t.forWhom.govText}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .forwhom {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .forwhom__card {
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-soft);
+  }
+
+  .forwhom__card h3 {
+    margin-bottom: 0.55rem;
+    font-size: 1.25rem;
+  }
+
+  .forwhom__card p {
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .forwhom {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

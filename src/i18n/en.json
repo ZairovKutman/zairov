@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "zairov — turnkey websites & IT solutions",
+    "description": "Professional websites, web apps, AI chatbots and automation for private business and the public sector. Experience since 2020. Sole proprietor Kutman Zairov."
+  },
+  "nav": {
+    "products": "Services",
+    "expertise": "Expertise",
+    "cases": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "brand": "zairov",
+    "title": "Professional turnkey website development",
+    "subtitle": "We build modern, fast and effective websites and IT solutions for private business and the public sector.",
+    "trust": "Since 2020 — private & government projects",
+    "ctaPrimary": "Send a request",
+    "ctaSecondary": "View case studies"
+  },
+  "products": {
+    "eyebrow": "Services",
+    "title": "IT solutions for your goals",
+    "lead": "From high-converting landings to process automation — full-cycle delivery.",
+    "items": [
+      {
+        "id": "turnkey",
+        "title": "Turnkey websites",
+        "text": "Modern, fast and effective websites for your business."
+      },
+      {
+        "id": "landing",
+        "title": "Landing pages",
+        "text": "Conversion-focused pages that bring clients."
+      },
+      {
+        "id": "ecommerce",
+        "title": "Online stores",
+        "text": "Stores with cart, payments and delivery flows."
+      },
+      {
+        "id": "aibots",
+        "title": "AI chatbots",
+        "text": "24/7 replies, conversation and sales automation."
+      },
+      {
+        "id": "automation",
+        "title": "Automation",
+        "text": "We automate business processes and save your time."
+      }
+    ]
+  },
+  "values": {
+    "eyebrow": "Approach",
+    "title": "How we deliver",
+    "items": [
+      {
+        "title": "Fast",
+        "text": "Speed optimization and high performance."
+      },
+      {
+        "title": "Reliable",
+        "text": "Secure code and data protection."
+      },
+      {
+        "title": "Responsive",
+        "text": "Perfect on every device."
+      },
+      {
+        "title": "Effective",
+        "text": "Websites that drive revenue."
+      }
+    ]
+  },
+  "expertise": {
+    "eyebrow": "Expertise",
+    "title": "Full delivery stack",
+    "lead": "Design, frontend, backend and architecture under one responsibility.",
+    "items": [
+      {
+        "title": "Design",
+        "text": "UI/UX and product design: structure, visuals and usability."
+      },
+      {
+        "title": "Frontend",
+        "text": "Fast interfaces, responsive layouts and clean client logic."
+      },
+      {
+        "title": "Backend",
+        "text": "APIs, databases, integrations, auth and stable server systems."
+      },
+      {
+        "title": "Architecture",
+        "text": "System design, scalability, security and long-term support."
+      }
+    ]
+  },
+  "forWhom": {
+    "eyebrow": "Audience",
+    "title": "Private & public sector",
+    "lead": "Since 2020 we have delivered for businesses and government teams — with clear process and accountable results.",
+    "privateTitle": "Private sector",
+    "privateText": "Websites, stores, CRM, bots and automation for companies and entrepreneurs.",
+    "govTitle": "Public sector",
+    "govText": "Portals, accounting systems, integrations and process digitization with transparent delivery."
+  },
+  "cases": {
+    "eyebrow": "Work",
+    "title": "Selected projects",
+    "lead": "Web products and systems already serving clients.",
+    "visit": "Open website",
+    "internal": "Internal product",
+    "items": [
+      {
+        "name": "UstaMaster",
+        "url": "https://ustamaster.kg",
+        "text": "A web platform to find and book local service professionals."
+      },
+      {
+        "name": "YogaMammy",
+        "url": "https://yogamammy.kg",
+        "text": "Yoga studio website: services, booking and brand presentation."
+      },
+      {
+        "name": "Toloykon",
+        "url": "https://toloykon.kg",
+        "text": "A business web product focused on customer convenience."
+      },
+      {
+        "name": "Fitness studio CRM",
+        "url": "",
+        "text": "CRM for a fitness studio: clients, bookings and studio workflows."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "How a project runs",
+    "steps": [
+      {
+        "title": "Brief",
+        "text": "Goals, audience, timeline and constraints."
+      },
+      {
+        "title": "Design & architecture",
+        "text": "Product structure, interface and technical approach."
+      },
+      {
+        "title": "Development",
+        "text": "Build, integrations and testing."
+      },
+      {
+        "title": "Launch",
+        "text": "Go-live, handoff and access transfer."
+      },
+      {
+        "title": "Support",
+        "text": "Iteration, monitoring and growth."
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "zairov — software & digital solutions",
+    "text": "Since 2020 we have built websites and IT systems for private business and the public sector. We cover the full cycle: design and architecture through frontend, backend and automation. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with contracts, a clear process and ownership of outcomes.",
+    "legal": "Sole proprietor Kutman Syradzhinovich Zairov"
+  },
+  "form": {
+    "eyebrow": "Contact",
+    "title": "Send a request",
+    "lead": "Briefly describe the task — the message goes to Telegram and we reply with next steps.",
+    "name": "Name",
+    "namePlaceholder": "How should we address you",
+    "sector": "Sector",
+    "sectorPrivate": "Private",
+    "sectorGov": "Government",
+    "sectorOther": "Other",
+    "interest": "Interested in",
+    "interestTurnkey": "Turnkey website",
+    "interestLanding": "Landing page",
+    "interestEcommerce": "Online store",
+    "interestAibots": "AI chatbot",
+    "interestAutomation": "Automation",
+    "interestOther": "Other / full IT solution",
+    "contact": "Phone or Telegram",
+    "contactPlaceholder": "+996… or @username",
+    "message": "About the task",
+    "messagePlaceholder": "What you need and preferred timeline",
+    "submit": "Send to Telegram",
+    "sending": "Sending…",
+    "success": "Request sent. We will contact you soon.",
+    "error": "Could not send. Try again or message us on Telegram.",
+    "required": "Required field"
+  },
+  "footer": {
+    "tagline": "Websites and IT solutions for business and government",
+    "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
+    "rights": "All rights reserved"
+  }
+}
