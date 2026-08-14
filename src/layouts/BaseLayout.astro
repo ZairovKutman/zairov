@@ -33,6 +33,9 @@ const localeHref = (l: Locale) =>
 <!doctype html>
 <html lang={locale}>
   <head>
+    <script is:inline>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
@@ -78,13 +81,12 @@ const localeHref = (l: Locale) =>
           if (raw) {
             sessionStorage.removeItem('zairov:lang-pos');
             var saved = JSON.parse(raw);
-            if (saved && saved.id) id = saved.id;
+            if (!id && saved && saved.id) id = saved.id;
           }
         } catch (e) {}
         if (!id || id === 'top') return;
-        document.documentElement.style.scrollBehavior = 'auto';
         var el = document.getElementById(id);
-        if (el) el.scrollIntoView({ block: 'start' });
+        if (el) el.scrollIntoView({ block: 'start', behavior: 'auto' });
       })();
     </script>
   </body>

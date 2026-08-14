@@ -97,6 +97,19 @@ const links = [
       el.addEventListener('click', () => setOpen(false));
     });
 
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.getElementById(href.slice(1));
+        if (!target) return;
+        event.preventDefault();
+        history.pushState(null, '', href);
+        target.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        setOpen(false);
+      });
+    });
+
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') setOpen(false);
     });

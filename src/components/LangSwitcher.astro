@@ -61,21 +61,17 @@ const languages: { code: Locale; label: string }[] = [
   };
 
   const saved = sessionStorage.getItem(STORAGE_KEY);
-  if (saved) {
+  if (saved && !window.location.hash) {
     sessionStorage.removeItem(STORAGE_KEY);
     try {
       const { id } = JSON.parse(saved) as { id?: string };
       const el = id ? document.getElementById(id) : null;
-      if (el) {
-        const html = document.documentElement;
-        const prev = html.style.scrollBehavior;
-        html.style.scrollBehavior = 'auto';
-        el.scrollIntoView({ block: 'start' });
-        html.style.scrollBehavior = prev;
-      }
+      if (el) el.scrollIntoView({ block: 'start', behavior: 'auto' });
     } catch {
       /* ignore */
     }
+  } else if (saved) {
+    sessionStorage.removeItem(STORAGE_KEY);
   }
 
   if (root) {
@@ -85,7 +81,7 @@ const languages: { code: Locale; label: string }[] = [
     window.addEventListener('scroll', syncLangHrefs, { passive: true });
 
     root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((a) => {
-      a.addEventListener('click', () => {
+      a.addEventListener('pointerdown', () => {
         const hash = currentSectionHash();
         const id = hash.replace('#', '');
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ id }));
