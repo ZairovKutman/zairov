@@ -70,5 +70,22 @@ const localeHref = (l: Locale) =>
       <ContactForm locale={locale} t={t} />
     </main>
     <Footer locale={locale} t={t} />
+    <script is:inline>
+      (function () {
+        var id = location.hash ? location.hash.slice(1) : '';
+        try {
+          var raw = sessionStorage.getItem('zairov:lang-pos');
+          if (raw) {
+            sessionStorage.removeItem('zairov:lang-pos');
+            var saved = JSON.parse(raw);
+            if (saved && saved.id) id = saved.id;
+          }
+        } catch (e) {}
+        if (!id || id === 'top') return;
+        document.documentElement.style.scrollBehavior = 'auto';
+        var el = document.getElementById(id);
+        if (el) el.scrollIntoView({ block: 'start' });
+      })();
+    </script>
   </body>
 </html>
