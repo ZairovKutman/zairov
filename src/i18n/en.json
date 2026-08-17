@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "zairov — turnkey websites & IT solutions",
-    "description": "Professional websites, web apps, AI chatbots and automation for private business and the public sector. Experience since 2020. Sole proprietor Kutman Zairov."
+    "description": "Websites, CRM, Telegram bots, integrations and support for private business and the public sector. Experience since 2020. Sole proprietor Kutman Zairov."
   },
   "nav": {
     "products": "Services",
@@ -23,32 +23,43 @@
   "products": {
     "eyebrow": "Services",
     "title": "IT solutions for your goals",
-    "lead": "From high-converting landings to process automation — full-cycle delivery.",
+    "lead": "Websites, CRM, bots and ongoing support — full-cycle delivery.",
     "items": [
       {
         "id": "turnkey",
         "title": "Turnkey websites",
-        "text": "Modern, fast and effective websites for your business."
-      },
-      {
-        "id": "landing",
-        "title": "Landing pages",
-        "text": "Conversion-focused pages that bring clients."
+        "text": "Landings, corporate sites and portals — from structure to launch.",
+        "includes": ["Landing", "Corporate site", "Portal"]
       },
       {
         "id": "ecommerce",
         "title": "Online stores",
-        "text": "Stores with cart, payments and delivery flows."
+        "text": "Cart, payments, delivery and customer accounts.",
+        "includes": ["Catalog", "Payments", "Delivery"]
       },
       {
-        "id": "aibots",
-        "title": "AI chatbots",
-        "text": "24/7 replies, conversation and sales automation."
+        "id": "crm",
+        "title": "CRM and internal systems",
+        "text": "Clients, bookings, statuses and company workflows.",
+        "includes": ["Client records", "Booking", "Admin panel"]
+      },
+      {
+        "id": "bots",
+        "title": "Telegram bots and AI assistants",
+        "text": "Requests, FAQ, booking and 24/7 replies in Telegram and on the site.",
+        "includes": ["Telegram", "AI replies", "Leads"]
       },
       {
         "id": "automation",
-        "title": "Automation",
-        "text": "We automate business processes and save your time."
+        "title": "Integrations and automation",
+        "text": "Payments, SMS, messengers and connected services in one flow.",
+        "includes": ["Payments", "SMS", "API"]
+      },
+      {
+        "id": "support",
+        "title": "Support",
+        "text": "Updates, monitoring and growth after launch.",
+        "includes": ["Fixes", "Monitoring", "Hosting"]
       }
     ]
   },
@@ -179,10 +190,11 @@
     "sectorOther": "Other",
     "interest": "Interested in",
     "interestTurnkey": "Turnkey website",
-    "interestLanding": "Landing page",
     "interestEcommerce": "Online store",
-    "interestAibots": "AI chatbot",
-    "interestAutomation": "Automation",
+    "interestCrm": "CRM / internal system",
+    "interestBots": "Telegram bot / AI assistant",
+    "interestAutomation": "Integrations and automation",
+    "interestSupport": "Support",
     "interestOther": "Other / full IT solution",
     "contact": "Phone or Telegram",
     "contactPlaceholder": "+996… or @username",

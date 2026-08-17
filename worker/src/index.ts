@@ -90,10 +90,13 @@ const SECTOR_LABEL: Record<string, string> = {
 
 const INTEREST_LABEL: Record<string, string> = {
   turnkey: 'Сайт под ключ',
-  landing: 'Landing page',
+  landing: 'Сайт под ключ',
   ecommerce: 'Интернет-магазин',
-  aibots: 'AI-чат-бот',
-  automation: 'Автоматизация',
+  crm: 'CRM / внутренняя система',
+  bots: 'Telegram-бот / AI-ассистент',
+  aibots: 'Telegram-бот / AI-ассистент',
+  automation: 'Интеграции и автоматизация',
+  support: 'Сопровождение',
   other: 'Другое / комплексное IT-решение',
 };
 

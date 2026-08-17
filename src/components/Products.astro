@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { t } = Astro.props;
-const [featured, ...rest] = t.products.items;
 ---
 
 <section class="section" id="products">
@@ -15,15 +14,16 @@ const [featured, ...rest] = t.products.items;
     <h2 class="section__title">{t.products.title}</h2>
     <p class="section__lead">{t.products.lead}</p>
     <div class="products">
-      <article class="product product--featured">
-        <h3>{featured.title}</h3>
-        <p>{featured.text}</p>
-      </article>
       {
-        rest.map((item) => (
-          <article class="product">
+        t.products.items.map((item, index) => (
+          <article class:list={['product', index === 0 && 'product--featured']}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
+            <ul class="product__includes">
+              {item.includes.map((entry) => (
+                <li>{entry}</li>
+              ))}
+            </ul>
           </article>
         ))
       }
@@ -38,6 +38,9 @@ const [featured, ...rest] = t.products.items;
   }
 
   .product {
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
     padding: 1.4rem 1.3rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -58,25 +61,39 @@ const [featured, ...rest] = t.products.items;
 
   .product h3 {
     font-size: 1.15rem;
-    margin-bottom: 0.45rem;
-  }
-
-  .product--featured h3 {
-    font-size: clamp(1.25rem, 2vw, 1.55rem);
   }
 
   .product p {
     color: var(--color-text-muted);
   }
 
+  .product__includes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .product__includes li {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
   @media (min-width: 768px) {
     .products {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
 
-    .product--featured {
-      grid-column: 1 / -1;
-      padding: 1.75rem 1.6rem;
+  @media (min-width: 1024px) {
+    .products {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>
