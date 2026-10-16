@@ -95,44 +95,26 @@ if (hero && root.classList.contains('is-rich') && 'IntersectionObserver' in wind
   quiet.observe(hero);
 }
 
-const stage = document.querySelector<HTMLElement>('[data-parallax]');
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-if (stage && root.classList.contains('is-rich') && finePointer) {
-  let tx = 0;
-  let ty = 0;
-  let cx = 0;
-  let cy = 0;
-  let running = false;
-  const max = 16;
+const stage = document.querySelector<HTMLElement>('[data-sculpture]');
+const canvas = stage?.querySelector<HTMLCanvasElement>('[data-sculpture-canvas]');
+const fallback = stage?.querySelector('[data-sculpture-fallback]') ?? null;
+const mobile = window.matchMedia('(max-width: 767px)').matches;
 
-  const tick = () => {
-    cx += (tx - cx) * 0.08;
-    cy += (ty - cy) * 0.08;
-    stage.style.setProperty('--dx', cx.toFixed(2));
-    stage.style.setProperty('--dy', cy.toFixed(2));
-    if (Math.abs(tx - cx) > 0.06 || Math.abs(ty - cy) > 0.06) {
-      requestAnimationFrame(tick);
-      return;
-    }
-    running = false;
+if (stage && canvas && root.classList.contains('is-rich') && !reduce) {
+  const boot = () => {
+    import('./sculpture')
+      .then(({ mountSculpture }) => {
+        mountSculpture({ canvas, host: stage, fallback });
+      })
+      .catch(() => {
+        canvas.hidden = true;
+        if (fallback instanceof HTMLElement) fallback.hidden = false;
+      });
   };
 
-  const start = () => {
-    if (running) return;
-    running = true;
-    requestAnimationFrame(tick);
-  };
-
-  stage.addEventListener('pointermove', (event) => {
-    const rect = stage.getBoundingClientRect();
-    tx = ((event.clientX - rect.left) / rect.width - 0.5) * max;
-    ty = ((event.clientY - rect.top) / rect.height - 0.5) * max;
-    start();
-  });
-
-  stage.addEventListener('pointerleave', () => {
-    tx = 0;
-    ty = 0;
-    start();
-  });
+  if (mobile && 'requestIdleCallback' in window) {
+    window.requestIdleCallback(boot, { timeout: 1200 });
+  } else {
+    boot();
+  }
 }

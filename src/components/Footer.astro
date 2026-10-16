@@ -1,20 +1,21 @@
 ---
 import type { Dictionary, Locale } from '../i18n';
 import Logo from './Logo.astro';
+import LangSwitcher from './LangSwitcher.astro';
 
 interface Props {
   locale: Locale;
   t: Dictionary;
 }
 
-const { t } = Astro.props;
+const { locale, t } = Astro.props;
 const year = new Date().getFullYear();
 
 const links = [
+  { href: '#about', label: t.nav.about },
   { href: '#products', label: t.nav.services },
   { href: '#cases', label: t.nav.work },
   { href: '#process', label: t.nav.process },
-  { href: '#about', label: t.nav.about },
   { href: '#contact', label: t.nav.contact },
 ];
 ---
@@ -57,6 +58,7 @@ const links = [
           </a>
         </li>
       </ul>
+      <LangSwitcher locale={locale} label={t.nav.language} />
       <p>{t.footer.note}</p>
     </div>
   </div>
@@ -130,7 +132,7 @@ const links = [
 <style>
   .footer {
     border-top: 1px solid var(--line);
-    padding-block: clamp(2.5rem, 6vw, 4rem);
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
     background: var(--bg);
   }
 
@@ -147,10 +149,10 @@ const links = [
   }
 
   .footer__name {
-    font-family: var(--font-display);
+    font-family: var(--font-brand);
     font-size: 1.4rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     color: var(--ink);
   }
 
@@ -237,8 +239,9 @@ const links = [
     margin: auto;
     padding: 0;
     border: 0;
-    background: var(--paper);
-    color: var(--paper-ink);
+    border-radius: 1.25rem;
+    background: #f6f3fb;
+    color: #160826;
   }
 
   .privacy[open] {
@@ -247,7 +250,7 @@ const links = [
   }
 
   .privacy::backdrop {
-    background: rgba(11, 15, 20, 0.72);
+    background: rgba(16, 5, 30, 0.78);
   }
 
   .privacy__head {
@@ -269,13 +272,13 @@ const links = [
     padding: 0;
     border: 0;
     background: none;
-    color: var(--paper-ink);
+    color: #160826;
     font-weight: 600;
     cursor: pointer;
   }
 
   .privacy__close:hover {
-    color: var(--signal);
+    color: #6d28d9;
   }
 
   .privacy__body {
@@ -292,12 +295,12 @@ const links = [
   }
 
   .privacy__body p {
-    color: var(--paper-muted);
+    color: #4c445c;
     line-height: 1.5;
   }
 
   .privacy__body a {
-    color: var(--signal);
+    color: #5b21b6;
     text-decoration: underline;
     text-underline-offset: 0.15em;
   }

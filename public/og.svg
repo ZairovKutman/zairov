@@ -1,18 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#0b0f14"/>
-  <g stroke="rgba(154,215,234,0.28)" stroke-width="1">
+  <rect width="1200" height="630" fill="#10051E"/>
+  <defs>
+    <radialGradient id="og-glow" cx="78%" cy="46%" r="42%">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#10051E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="og-z" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F4FF"/>
+      <stop offset="0.45" stop-color="#5B8CFF"/>
+      <stop offset="1" stop-color="#E84AFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og-glow)"/>
+  <g stroke="rgba(246,243,251,0.12)" stroke-width="1">
     <path d="M72 72h36M90 54v36"/>
     <path d="M1128 72h-36M1110 54v36"/>
     <path d="M72 558h36M90 540v36"/>
     <path d="M1128 558h-36M1110 540v36"/>
   </g>
-  <g fill="#1b5a72" transform="translate(788 174) scale(7)">
+  <g fill="#3B0764" transform="translate(788 174) scale(7)">
     <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
   </g>
-  <g fill="#e7f6fb" transform="translate(760 150) scale(7)">
+  <g fill="url(#og-z)" transform="translate(760 150) scale(7)">
     <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
   </g>
-  <text x="84" y="300" fill="#f5f8fa" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" letter-spacing="10">ZAIROV</text>
-  <text x="88" y="370" fill="#9ad7ea" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="3">ENGINEERING DIGITAL GROWTH</text>
-  <text x="88" y="500" fill="#c3ced8" font-family="Arial, Helvetica, sans-serif" font-size="24">Kyrgyzstan · since 2020</text>
+  <text x="84" y="300" fill="#F6F3FB" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" letter-spacing="10">ZAIROV</text>
+  <text x="88" y="370" fill="#C4B5FD" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="3">DIGITAL ENGINEERING STUDIO</text>
+  <text x="88" y="500" fill="#B7AEC8" font-family="Arial, Helvetica, sans-serif" font-size="24">Kyrgyzstan · since 2020</text>
 </svg>

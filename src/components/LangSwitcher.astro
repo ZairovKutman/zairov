@@ -36,7 +36,7 @@ const languages: { code: Locale; label: string }[] = [
 
 <script>
   const STORAGE_KEY = 'zairov:lang-pos';
-  const root = document.querySelector('[data-lang-switcher]');
+  const roots = document.querySelectorAll('[data-lang-switcher]');
 
   const currentSectionHash = (): string => {
     if (window.location.hash && window.location.hash !== '#top') {
@@ -55,10 +55,11 @@ const languages: { code: Locale; label: string }[] = [
   };
 
   const syncLangHrefs = () => {
-    if (!root) return;
     const hash = currentSectionHash();
-    root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((anchor) => {
-      anchor.href = `${anchor.dataset.langHref}${hash}`;
+    roots.forEach((root) => {
+      root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((anchor) => {
+        anchor.href = `${anchor.dataset.langHref}${hash}`;
+      });
     });
   };
 
@@ -76,18 +77,22 @@ const languages: { code: Locale; label: string }[] = [
     sessionStorage.removeItem(STORAGE_KEY);
   }
 
-  if (root) {
+  if (roots.length) {
     syncLangHrefs();
-    root.addEventListener('pointerenter', syncLangHrefs);
-    root.addEventListener('focusin', syncLangHrefs);
+    roots.forEach((root) => {
+      root.addEventListener('pointerenter', syncLangHrefs);
+      root.addEventListener('focusin', syncLangHrefs);
+    });
     window.addEventListener('scroll', syncLangHrefs, { passive: true });
 
-    root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((anchor) => {
-      anchor.addEventListener('pointerdown', () => {
-        const hash = currentSectionHash();
-        const id = hash.replace('#', '');
-        sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ id }));
-        anchor.href = `${anchor.dataset.langHref}${hash}`;
+    roots.forEach((root) => {
+      root.querySelectorAll<HTMLAnchorElement>('a[data-lang-href]').forEach((anchor) => {
+        anchor.addEventListener('pointerdown', () => {
+          const hash = currentSectionHash();
+          const id = hash.replace('#', '');
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ id }));
+          anchor.href = `${anchor.dataset.langHref}${hash}`;
+        });
       });
     });
   }
@@ -114,7 +119,8 @@ const languages: { code: Locale; label: string }[] = [
 
   .lang__link.is-active {
     color: var(--ink);
-    box-shadow: inset 0 -1px 0 var(--accent);
+    border-radius: var(--radius-pill);
+    background: rgba(246, 243, 251, 0.08);
   }
 
   .lang__link:hover {

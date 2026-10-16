@@ -7,16 +7,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Products from '../components/Products.astro';
-import Values from '../components/Values.astro';
-import Expertise from '../components/Expertise.astro';
-import ForWhom from '../components/ForWhom.astro';
 import Cases from '../components/Cases.astro';
 import Process from '../components/Process.astro';
 import About from '../components/About.astro';
+import Why from '../components/Why.astro';
 import ContactForm from '../components/ContactForm.astro';
 
-import displayFont from '@fontsource/unbounded/files/unbounded-cyrillic-500-normal.woff2?url';
-import displayLatin from '@fontsource/unbounded/files/unbounded-latin-500-normal.woff2?url';
+import displayFont from '@fontsource/onest/files/onest-cyrillic-500-normal.woff2?url';
+import displayLatin from '@fontsource/onest/files/onest-latin-500-normal.woff2?url';
 import textFont from '@fontsource/onest/files/onest-cyrillic-400-normal.woff2?url';
 import textLatin from '@fontsource/onest/files/onest-latin-400-normal.woff2?url';
 
@@ -48,7 +46,7 @@ const jsonLd = {
   url: localeHref(locale),
   image: ogImage,
   description: t.meta.description,
-  slogan: 'Engineering Digital Growth',
+  slogan: 'Digital Engineering Studio',
   areaServed: { '@type': 'Country', name: 'Kyrgyzstan' },
   address: { '@type': 'PostalAddress', addressCountry: 'KG' },
   founder: { '@type': 'Person', name: t.about.founder },
@@ -95,7 +93,7 @@ const jsonLd = {
     <meta name="twitter:title" content={t.meta.title} />
     <meta name="twitter:description" content={t.meta.description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" content="#0b0f14" />
+    <meta name="theme-color" content="#10051E" />
     <link rel="icon" href={`${basePath}favicon.svg`} type="image/svg+xml" />
     <link rel="preload" href={preloadDisplay} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={preloadText} as="font" type="font/woff2" crossorigin />
@@ -106,13 +104,11 @@ const jsonLd = {
     <Header locale={locale} t={t} />
     <main id="content">
       <Hero t={t} />
-      <Values t={t} />
+      <About t={t} />
       <Products t={t} />
       <Cases t={t} />
-      <ForWhom t={t} />
-      <Expertise t={t} />
+      <Why t={t} />
       <Process t={t} />
-      <About t={t} />
       <ContactForm locale={locale} t={t} />
     </main>
     <Footer locale={locale} t={t} />

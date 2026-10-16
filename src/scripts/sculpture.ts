@@ -2,8 +2,8 @@ import {
   ACESFilmicToneMapping,
   AmbientLight,
   Color,
+  CatmullRomCurve3,
   DirectionalLight,
-  ExtrudeGeometry,
   Group,
   HemisphereLight,
   Mesh,
@@ -13,9 +13,9 @@ import {
   PerspectiveCamera,
   PointLight,
   Scene,
-  Shape,
   SphereGeometry,
   SRGBColorSpace,
+  TubeGeometry,
   Vector2,
   Vector3,
   WebGLRenderer,
@@ -27,51 +27,35 @@ interface MountOptions {
   fallback: Element | null;
 }
 
-const Z_PATH: [number, number][] = [
-  [-1.56, 1.34],
-  [1.56, 1.34],
-  [1.56, 0.86],
-  [-0.38, -0.86],
-  [1.56, -0.86],
-  [1.56, -1.34],
-  [-1.56, -1.34],
-  [-1.56, -0.86],
-  [0.38, 0.86],
-  [-1.56, 0.86],
-];
-
 function createZGeometry(detail: number) {
-  const shape = new Shape();
-  Z_PATH.forEach(([x, y], index) => {
-    if (index === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
-  });
-  shape.closePath();
+  const points: Vector3[] = [];
 
-  const geometry = new ExtrudeGeometry(shape, {
-    depth: 0.62,
-    bevelEnabled: true,
-    bevelThickness: 0.16,
-    bevelSize: 0.11,
-    bevelOffset: -0.02,
-    bevelSegments: detail,
-    curveSegments: detail,
-  });
+  const push = (x: number, y: number, z: number) => points.push(new Vector3(x, y, z));
 
-  geometry.center();
-
-  const pos = geometry.attributes.position;
-  const vertex = new Vector3();
-  for (let i = 0; i < pos.count; i += 1) {
-    vertex.fromBufferAttribute(pos, i);
-    const t = (vertex.y + 1.55) / 3.1;
-    const twist = (t - 0.5) * 0.92;
-    const x = vertex.x * Math.cos(twist) - vertex.z * Math.sin(twist);
-    const z = vertex.x * Math.sin(twist) + vertex.z * Math.cos(twist);
-    const swell = Math.sin(t * Math.PI) * 0.1;
-    pos.setXYZ(i, x * (1 + swell * 0.18), vertex.y, z + Math.cos(t * Math.PI * 2) * 0.14);
+  for (let i = 0; i <= 20; i += 1) {
+    const t = i / 20;
+    push(-1.55 + t * 3.1, 1.22 + Math.sin(t * Math.PI) * 0.1, Math.sin(t * Math.PI) * 0.42);
   }
 
+  for (let i = 1; i <= 32; i += 1) {
+    const t = i / 32;
+    push(
+      1.55 - t * 3.1,
+      1.22 - t * 2.44,
+      Math.sin(t * Math.PI) * 0.95 + Math.sin(t * Math.PI * 2) * 0.32,
+    );
+  }
+
+  for (let i = 1; i <= 20; i += 1) {
+    const t = i / 20;
+    push(-1.55 + t * 3.1, -1.22 - Math.sin(t * Math.PI) * 0.1, Math.sin((1 - t) * Math.PI) * 0.42);
+  }
+
+  const curve = new CatmullRomCurve3(points, false, 'catmullrom', 0.38);
+  const tubular = detail > 6 ? 240 : 110;
+  const radial = detail > 6 ? 32 : 16;
+  const geometry = new TubeGeometry(curve, tubular, 0.24, radial, false);
+  geometry.center();
   geometry.computeVertexNormals();
   return geometry;
 }
@@ -157,8 +141,8 @@ export function mountSculpture({ canvas, host, fallback }: MountOptions): () => 
   });
 
   const mesh = new Mesh(geometry, material);
-  mesh.rotation.set(0.18, -0.42, 0.08);
-  mesh.scale.setScalar(mobile ? 1.15 : 1.28);
+  mesh.rotation.set(0.22, -0.55, 0.18);
+  mesh.scale.setScalar(mobile ? 1.05 : 1.18);
 
   const group = new Group();
   group.add(mesh);
