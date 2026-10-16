@@ -14,11 +14,20 @@ const { id, label } = Astro.props;
     id === 'ustamaster' && (
       <div class="frame frame--wide">
         <div class="chrome"><i></i><i></i><i></i></div>
-        <div class="search"></div>
+        <div class="search"><em></em></div>
         <div class="cards">
-          <b></b>
-          <b></b>
-          <b></b>
+          <b>
+            <s></s>
+            <s></s>
+          </b>
+          <b>
+            <s></s>
+            <s></s>
+          </b>
+          <b>
+            <s></s>
+            <s></s>
+          </b>
         </div>
       </div>
     )
@@ -134,6 +143,16 @@ const { id, label } = Astro.props;
     border: 1px solid var(--line);
     margin-bottom: 0.8rem;
     background: rgba(104, 136, 255, 0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+
+  .search em {
+    display: block;
+    width: 42%;
+    height: 0.35rem;
+    background: rgba(255, 255, 255, 0.16);
   }
 
   .cards {
@@ -141,6 +160,20 @@ const { id, label } = Astro.props;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.55rem;
     height: calc(100% - 2.8rem);
+  }
+
+  .cards b {
+    display: grid;
+    align-content: end;
+    gap: 0.35rem;
+    padding: 0.45rem;
+  }
+
+  .cards s {
+    display: block;
+    height: 0.28rem;
+    background: rgba(255, 255, 255, 0.12);
+    text-decoration: none;
   }
 
   .cards b,

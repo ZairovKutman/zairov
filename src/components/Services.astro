@@ -103,6 +103,10 @@ const { t } = Astro.props;
     max-width: 42rem;
   }
 
+  .service__body[hidden] {
+    display: none;
+  }
+
   .service__body p {
     color: var(--muted);
   }
@@ -136,9 +140,20 @@ const { t } = Astro.props;
       padding-right: 2rem;
     }
 
-    .service__body {
+    .service__body,
+    .service__body[hidden] {
+      display: grid !important;
       padding: 1.35rem 0 1.5rem;
       max-width: none;
+    }
+
+    .service__chevron {
+      opacity: 0;
+    }
+
+    .service:hover,
+    .service:focus-within {
+      background: rgba(255, 255, 255, 0.015);
     }
   }
 </style>

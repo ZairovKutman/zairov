@@ -149,6 +149,10 @@ p {
   scroll-margin-top: calc(var(--header-h) + 0.75rem);
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .section {
   position: relative;
   padding-block: clamp(4.5rem, 8vw, 8.5rem);

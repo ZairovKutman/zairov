@@ -59,26 +59,26 @@ const links = [
       </button>
     </div>
   </div>
-
-  <div class="header__drawer" id="mobile-nav" hidden data-menu-panel>
-    <div class="container header__drawer-inner">
-      <nav class="header__drawer-nav" aria-label={t.nav.mobile}>
-        {
-          links.map((link, i) => (
-            <a class="header__drawer-link" href={link.href} data-menu-close>
-              <span>0{i + 1}</span>
-              {link.label}
-            </a>
-          ))
-        }
-      </nav>
-      <a class="btn btn--primary header__drawer-cta" href="#contact" data-menu-close>
-        {t.nav.discuss}
-        <span class="btn__arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </div>
 </header>
+
+<div class="header__drawer" id="mobile-nav" hidden data-menu-panel>
+  <div class="container header__drawer-inner">
+    <nav class="header__drawer-nav" aria-label={t.nav.mobile}>
+      {
+        links.map((link, i) => (
+          <a class="header__drawer-link" href={link.href} data-menu-close>
+            <span>0{i + 1}</span>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <a class="btn btn--primary header__drawer-cta" href="#contact" data-menu-close>
+      {t.nav.discuss}
+      <span class="btn__arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
 
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
@@ -99,6 +99,7 @@ const links = [
       panel.hidden = !open;
       document.body.classList.toggle('menu-open', open);
       toggle.classList.toggle('is-open', open);
+      header?.classList.toggle('is-menu', open);
       main?.toggleAttribute('inert', open);
       footer?.toggleAttribute('inert', open);
       if (labelOpen instanceof HTMLElement) labelOpen.hidden = open;
@@ -150,6 +151,7 @@ const links = [
         panel.hidden = true;
         document.body.classList.remove('menu-open');
         toggle.classList.remove('is-open');
+        header?.classList.remove('is-menu');
         main?.removeAttribute('inert');
         footer?.removeAttribute('inert');
       }
@@ -184,8 +186,9 @@ const links = [
       border-color 240ms var(--ease);
   }
 
-  .header.is-scrolled {
-    background: rgba(8, 11, 18, 0.88);
+  .header.is-scrolled,
+  .header.is-menu {
+    background: rgba(8, 11, 18, 0.94);
     border-bottom-color: var(--line);
   }
 
@@ -306,10 +309,9 @@ const links = [
   .header__drawer {
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: 35;
     padding-top: calc(var(--header-h) + 1rem);
-    background: rgba(8, 11, 18, 0.97);
-    backdrop-filter: blur(20px);
+    background: var(--bg);
   }
 
   .header__drawer-inner {

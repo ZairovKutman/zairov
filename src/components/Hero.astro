@@ -62,10 +62,11 @@ const { t } = Astro.props;
 
   .hero__grid {
     position: absolute;
-    inset: 0;
+    inset: 18% 0 0;
     background-image: linear-gradient(var(--line) 1px, transparent 1px);
-    background-size: 100% 7.5rem;
-    mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    background-size: 100% 8.5rem;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+    opacity: 0.55;
     pointer-events: none;
   }
 
@@ -130,6 +131,23 @@ const { t } = Astro.props;
     width: 1px;
     height: 2.4rem;
     background: linear-gradient(180deg, var(--accent), transparent);
+  }
+
+  @media (max-width: 959px) {
+    .hero__visual {
+      position: absolute;
+      right: -8%;
+      top: 18%;
+      width: min(58vw, 18rem);
+      opacity: 0.42;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero__copy {
+      position: relative;
+      z-index: 1;
+    }
   }
 
   @media (min-width: 960px) {
