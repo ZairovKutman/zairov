@@ -1,31 +1,99 @@
 ---
 import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
+import Study from './Study.astro';
 
 interface Props {
   t: Dictionary;
 }
 
 const { t } = Astro.props;
+const [lead, ...rest] = t.work.items;
+
+const statusLabel = (status: string) => (status === 'internal' ? t.work.statusInternal : t.work.statusLive);
 ---
 
 <section class="section" id="cases">
   <div class="container">
-    <p class="section__eyebrow">{t.cases.eyebrow}</p>
-    <h2 class="section__title">{t.cases.title}</h2>
-    <p class="section__lead">{t.cases.lead}</p>
-    <div class="cases">
+    <SectionIntro index="02" eyebrow={t.work.eyebrow} title={t.work.title} lead={t.work.lead} />
+
+    <article class="feature" data-reveal>
+      <div class="feature__copy">
+        <p class="feature__meta">
+          <span>01</span>
+          <span>{lead.kind}</span>
+          <span class="feature__status">{statusLabel(lead.status)}</span>
+        </p>
+        <h3 class="display feature__name">{lead.name}</h3>
+        <p class="feature__text">{lead.text}</p>
+        {
+          lead.url ? (
+            <a class="link" href={lead.url} target="_blank" rel="noopener noreferrer">
+              {t.work.visit}
+              <span class="sr-only">, {lead.name}. {t.a11y.external}</span>
+              <span class="link__arrow" aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <p class="feature__internal">{t.work.internal}</p>
+          )
+        }
+      </div>
       {
-        t.cases.items.map((item) => (
-          <article class="case">
-            <h3>{item.name}</h3>
-            <p>{item.text}</p>
-            {item.url ? (
-              <a class="case__link" href={item.url} target="_blank" rel="noopener noreferrer">
-                {item.url.replace(/^https?:\/\//, '')}
-              </a>
-            ) : (
-              <span class="case__meta">{t.cases.internal}</span>
-            )}
+        lead.url ? (
+          <figure class="shot">
+            <img
+              src={`${import.meta.env.BASE_URL}work/${lead.id}.webp`}
+              alt={lead.name}
+              width="1200"
+              height="750"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ) : (
+          <Study id={lead.id} label={t.work.study} />
+        )
+      }
+    </article>
+
+    <div class="work">
+      {
+        rest.map((item, index) => (
+          <article class="work__item" data-reveal style={`--d:${index * 70}ms`}>
+            {
+              item.url ? (
+                <figure class="shot">
+                  <img
+                    src={`${import.meta.env.BASE_URL}work/${item.id}.webp`}
+                    alt={item.name}
+                    width="1200"
+                    height="750"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : (
+                <Study id={item.id} label={t.work.study} />
+              )
+            }
+            <div>
+              <p class="work__meta">
+                <span>{String(index + 2).padStart(2, '0')}</span>
+                <span>{item.kind}</span>
+                <span>{statusLabel(item.status)}</span>
+              </p>
+              <h3 class="display work__name">{item.name}</h3>
+              <p>{item.text}</p>
+              {item.url ? (
+                <a class="link" href={item.url} target="_blank" rel="noopener noreferrer">
+                  {t.work.visit}
+                  <span class="sr-only">, {item.name}. {t.a11y.external}</span>
+                  <span class="link__arrow" aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <p class="work__internal">{t.work.internal}</p>
+              )}
+            </div>
           </article>
         ))
       }
@@ -34,57 +102,124 @@ const { t } = Astro.props;
 </section>
 
 <style>
-  .cases {
+  .feature {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feature__meta,
+  .work__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.8rem;
+    margin-bottom: 0.7rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .feature__meta span:first-child,
+  .work__meta span:first-child,
+  .feature__status {
+    color: var(--accent);
+  }
+
+  .feature__name {
+    margin-bottom: 0.8rem;
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    max-width: 12ch;
+  }
+
+  .feature__text,
+  .work__item p {
+    max-width: 36rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .feature__internal,
+  .work__internal {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .work {
+    display: grid;
+  }
+
+  .work__item {
     display: grid;
     gap: 1rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  .case {
-    display: grid;
-    gap: 0.55rem;
-    align-content: start;
-    padding: 1.4rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.02);
-    min-height: 11rem;
-    transition: border-color 200ms var(--ease-out);
+  .work__name {
+    margin-bottom: 0.45rem;
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
   }
 
-  .case:hover {
-    border-color: rgba(61, 143, 173, 0.4);
+  .shot {
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--bg-raise);
   }
 
-  .case h3 {
-    font-size: 1.25rem;
+  .shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 
-  .case p {
-    color: var(--color-text-muted);
+  .work__item:hover :global(.study),
+  .feature:hover :global(.study),
+  .work__item:hover .shot,
+  .feature:hover .shot {
+    border-color: rgba(154, 215, 234, 0.55);
   }
 
-  .case__link {
-    margin-top: auto;
-    color: var(--color-accent);
-    font-weight: 600;
-    width: fit-content;
-    border-bottom: 1px solid transparent;
+  @media (min-width: 800px) {
+    .feature {
+      grid-template-columns: minmax(0, 1.05fr) minmax(16rem, 0.95fr);
+      gap: 2rem;
+      align-items: end;
+      padding-bottom: 2.5rem;
+    }
+
+    .work {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .work__item {
+      padding: 1.75rem 1.5rem 1.75rem 0;
+    }
+
+    .work__item:nth-child(odd) {
+      padding-right: 1.5rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .work__item:nth-child(even) {
+      padding-left: 1.5rem;
+    }
   }
 
-  .case__link:hover {
-    border-bottom-color: currentColor;
-  }
+  @media (min-width: 1100px) {
+    .feature :global(.study) {
+      min-height: 22rem;
+    }
 
-  .case__meta {
-    margin-top: auto;
-    color: var(--color-text-muted);
-    font-size: 0.92rem;
-    font-weight: 600;
-  }
-
-  @media (min-width: 768px) {
-    .cases {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .work__item :global(.study) {
+      min-height: 13rem;
     }
   }
 </style>

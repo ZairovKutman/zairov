@@ -1,187 +1,258 @@
 {
   "meta": {
-    "title": "zairov — turnkey websites & IT solutions",
-    "description": "Websites, CRM, Telegram bots, integrations and support for private business and the public sector. Experience since 2020. Sole proprietor Kutman Zairov."
+    "title": "ZAIROV — technology that moves business",
+    "description": "Websites, CRM, retail and POS, AI assistants and integrations for business and the public sector. Kyrgyzstan, since 2020. Sole proprietor Kutman Zairov."
   },
   "nav": {
-    "products": "Services",
-    "expertise": "Expertise",
-    "cases": "Work",
+    "home": "ZAIROV — home",
+    "services": "Services",
+    "work": "Work",
+    "process": "Process",
     "about": "About",
-    "contact": "Contact",
+    "contact": "Discuss a project",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "footer": "Footer",
+    "language": "Language"
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "external": "opens in a new tab"
   },
   "hero": {
-    "brand": "zairov",
-    "title": "Professional turnkey website development",
-    "subtitle": "We build modern, fast and effective websites and IT solutions for private business and the public sector.",
-    "trust": "Since 2020 — private & government projects",
-    "ctaPrimary": "Send a request",
-    "ctaSecondary": "View case studies"
+    "line": "Engineering Digital Growth",
+    "title": ["We build technology", "that moves business"],
+    "subtitle": "Websites, digital platforms and software systems — from idea through launch and growth.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "View projects",
+    "fig": "Fig. 01 · Kyrgyzstan · since 2020"
   },
-  "products": {
+  "trust": {
+    "label": "Facts",
+    "items": [
+      { "label": "Since 2020", "text": "Private business and the public sector" },
+      { "label": "Full cycle", "text": "Idea, interface, engineering, launch" },
+      { "label": "Systems", "text": "Websites, CRM, retail, AI, integrations" },
+      { "label": "Registered", "text": "Sole proprietor Kutman Zairov" }
+    ]
+  },
+  "services": {
     "eyebrow": "Services",
-    "title": "IT solutions for your goals",
-    "lead": "Websites, CRM, bots and ongoing support — full-cycle delivery.",
+    "title": "What we build",
+    "lead": "Six practices. Each one answers a business problem, not a single screen.",
+    "discuss": "Discuss",
     "items": [
       {
-        "id": "turnkey",
-        "title": "Turnkey websites",
+        "id": "sites",
+        "interest": "turnkey",
+        "title": "Websites",
         "text": "Landings, corporate sites and portals — from structure to launch.",
         "includes": ["Landing", "Corporate site", "Portal"]
       },
       {
-        "id": "ecommerce",
-        "title": "Online stores",
-        "text": "Cart, payments, delivery and customer accounts.",
-        "includes": ["Catalog", "Payments", "Delivery"]
-      },
-      {
         "id": "crm",
-        "title": "CRM and internal systems",
-        "text": "Clients, bookings, statuses and company workflows.",
-        "includes": ["Client records", "Booking", "Admin panel"]
+        "interest": "crm",
+        "title": "CRM and business systems",
+        "text": "Clients, bookings, statuses and company workflows in one working system.",
+        "includes": ["Client records", "Booking", "Admin"]
       },
       {
-        "id": "bots",
-        "title": "Telegram bots and AI assistants",
-        "text": "Requests, FAQ, booking and 24/7 replies in Telegram and on the site.",
+        "id": "retail",
+        "interest": "pos",
+        "title": "Retail and POS",
+        "text": "Online stores, checkout and sales records: catalog, payments, delivery, the counter.",
+        "includes": ["Online store", "POS", "Payments"]
+      },
+      {
+        "id": "ai",
+        "interest": "bots",
+        "title": "AI and automation",
+        "text": "Telegram bots and AI assistants: requests, replies and booking without waiting on an operator.",
         "includes": ["Telegram", "AI replies", "Leads"]
       },
       {
-        "id": "automation",
-        "title": "Integrations and automation",
-        "text": "Payments, SMS, messengers and connected services in one flow.",
+        "id": "integrations",
+        "interest": "automation",
+        "title": "Integrations",
+        "text": "Payments, SMS, messengers and APIs joined into one operating flow.",
         "includes": ["Payments", "SMS", "API"]
       },
       {
         "id": "support",
+        "interest": "support",
         "title": "Support",
-        "text": "Updates, monitoring and growth after launch.",
+        "text": "Changes, monitoring and growth after launch. The system keeps an owner.",
         "includes": ["Fixes", "Monitoring", "Hosting"]
       }
     ]
   },
-  "values": {
-    "eyebrow": "Approach",
-    "title": "How we deliver",
+  "work": {
+    "eyebrow": "Work",
+    "title": "Work you can open",
+    "lead": "Public websites and one internal system. Status is stated as it is.",
+    "visit": "Open website",
+    "internal": "Internal product",
+    "study": "Interface study",
+    "statusLive": "Live",
+    "statusInternal": "Internal product",
     "items": [
       {
-        "title": "Fast",
-        "text": "Speed optimization and high performance."
+        "id": "ustamaster",
+        "name": "UstaMaster",
+        "url": "https://ustamaster.kg",
+        "text": "A web platform to find and book local service professionals.",
+        "kind": "Services platform",
+        "status": "live"
       },
       {
-        "title": "Reliable",
-        "text": "Secure code and data protection."
+        "id": "yogamammy",
+        "name": "YogaMammy",
+        "url": "https://yogamammy.kg",
+        "text": "Yoga studio website: services, booking and brand presentation.",
+        "kind": "Studio website",
+        "status": "live"
       },
       {
-        "title": "Responsive",
-        "text": "Perfect on every device."
+        "id": "toloykon",
+        "name": "Toloykon",
+        "url": "https://toloykon.kg",
+        "text": "A business web product focused on customer convenience.",
+        "kind": "Business website",
+        "status": "live"
       },
       {
-        "title": "Effective",
-        "text": "Websites that drive revenue."
+        "id": "hidden",
+        "name": "Hidden Kyrgyzstan",
+        "url": "https://hiddenkyrgyzstan.com/en",
+        "text": "A travel site for quiet Kyrgyzstan: horse trails, high lakes and nights in yurts.",
+        "kind": "Travel website",
+        "status": "live"
+      },
+      {
+        "id": "fitness",
+        "name": "Fitness studio CRM",
+        "url": "",
+        "text": "CRM for a fitness studio: clients, bookings and studio workflows.",
+        "kind": "CRM",
+        "status": "internal"
+      }
+    ]
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Shaped to the task",
+    "lead": "The same engineering approach. A different product logic for how your day actually runs.",
+    "items": [
+      {
+        "title": "Retail",
+        "text": "Storefront, orders, payments, delivery and sales records in one chain.",
+        "fit": "Shop and point of sale"
+      },
+      {
+        "title": "Services",
+        "text": "A site, booking and requests for studios, trades and service companies.",
+        "fit": "Studio and service business"
+      },
+      {
+        "title": "Education",
+        "text": "Schedule, enrollment and a clear presentation of programs — as its own system.",
+        "fit": "Course and learning center"
+      },
+      {
+        "title": "Business",
+        "text": "A website, CRM and internal processes a team actually uses every day.",
+        "fit": "Company and sole proprietor"
+      },
+      {
+        "title": "Public sector",
+        "text": "Portals, records and integrations. A clear handoff and support.",
+        "fit": "Institution and agency"
       }
     ]
   },
   "expertise": {
-    "eyebrow": "Expertise",
-    "title": "Full delivery stack",
-    "lead": "Design, frontend, backend and architecture under one responsibility.",
+    "eyebrow": "Engineering",
+    "title": "What a system is made of",
+    "lead": "Interface, server, data and connections — under one responsibility.",
     "items": [
       {
-        "title": "Design",
-        "text": "UI/UX and product design: structure, visuals and usability."
-      },
-      {
         "title": "Frontend",
-        "text": "Fast interfaces, responsive layouts and clean client logic."
+        "text": "Fast interfaces, responsive layout and accessibility. What a person opens on a phone."
       },
       {
         "title": "Backend",
-        "text": "APIs, databases, integrations, auth and stable server systems."
+        "text": "APIs, authentication, business logic and a steady server side."
+      },
+      {
+        "title": "Databases",
+        "text": "A data model for real work: clients, orders, bookings, statuses."
       },
       {
         "title": "Architecture",
-        "text": "System design, scalability, security and long-term support."
-      }
-    ]
-  },
-  "forWhom": {
-    "eyebrow": "Audience",
-    "title": "Private & public sector",
-    "lead": "Since 2020 we have delivered for businesses and government teams — with clear process and accountable results.",
-    "privateTitle": "Private sector",
-    "privateText": "Websites, stores, CRM, bots and automation for companies and entrepreneurs.",
-    "govTitle": "Public sector",
-    "govText": "Portals, accounting systems, integrations and process digitization with transparent delivery."
-  },
-  "cases": {
-    "eyebrow": "Work",
-    "title": "Selected projects",
-    "lead": "Web products and systems already serving clients.",
-    "visit": "Open website",
-    "internal": "Internal product",
-    "items": [
-      {
-        "name": "UstaMaster",
-        "url": "https://ustamaster.kg",
-        "text": "A web platform to find and book local service professionals."
+        "text": "The system map before the code: boundaries, links and what can grow later."
       },
       {
-        "name": "YogaMammy",
-        "url": "https://yogamammy.kg",
-        "text": "Yoga studio website: services, booking and brand presentation."
-      },
-      {
-        "name": "Toloykon",
-        "url": "https://toloykon.kg",
-        "text": "A business web product focused on customer convenience."
-      },
-      {
-        "name": "Fitness studio CRM",
-        "url": "",
-        "text": "CRM for a fitness studio: clients, bookings and studio workflows."
+        "title": "Security and integrations",
+        "text": "Access, payment and service connections, careful movement of data."
       }
     ]
   },
   "process": {
     "eyebrow": "Process",
-    "title": "How a project runs",
+    "title": "How a project starts",
+    "lead": "Five steps. Each one shows what is done and what comes next.",
     "steps": [
-      {
-        "title": "Brief",
-        "text": "Goals, audience, timeline and constraints."
-      },
-      {
-        "title": "Design & architecture",
-        "text": "Product structure, interface and technical approach."
-      },
-      {
-        "title": "Development",
-        "text": "Build, integrations and testing."
-      },
-      {
-        "title": "Launch",
-        "text": "Go-live, handoff and access transfer."
-      },
-      {
-        "title": "Support",
-        "text": "Iteration, monitoring and growth."
-      }
+      { "title": "Discovery", "text": "Goals, constraints, audience and the definition of done." },
+      { "title": "UX/UI", "text": "Structure, flows and interface before engineering." },
+      { "title": "Engineering", "text": "Build, integrations and verification." },
+      { "title": "Launch", "text": "Go-live, training and access handoff." },
+      { "title": "Support", "text": "Changes, monitoring and growth." }
     ]
   },
   "about": {
-    "eyebrow": "About",
-    "title": "zairov — software & digital solutions",
-    "text": "Since 2020 we have built websites and IT systems for private business and the public sector. We cover the full cycle: design and architecture through frontend, backend and automation. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with contracts, a clear process and ownership of outcomes.",
-    "legal": "Sole proprietor Kutman Syradzhinovich Zairov"
+    "eyebrow": "Why ZAIROV",
+    "title": "One line of responsibility",
+    "text": "Since 2020 we have built websites and software systems for private business and the public sector. We cover the cycle from interface and architecture through engineering, integrations and support. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with a contract and ownership of the outcome.",
+    "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
+    "founder": "Kutman Syradzhinovich Zairov",
+    "points": [
+      {
+        "title": "Contract",
+        "text": "A registered practice, stated stages and a clear handoff."
+      },
+      {
+        "title": "Two sectors",
+        "text": "Private business and public-sector work — since 2020."
+      },
+      {
+        "title": "Full cycle",
+        "text": "Design, engineering, launch and later changes stay in one place."
+      },
+      {
+        "title": "After launch",
+        "text": "Access is handed over. Support stays if the system needs to grow."
+      }
+    ]
+  },
+  "contacts": {
+    "eyebrow": "Contact",
+    "title": "Write directly",
+    "lead": "Email, WhatsApp or Telegram. Or use the form — the request arrives in Telegram.",
+    "emailLabel": "Email",
+    "whatsappLabel": "WhatsApp",
+    "telegramLabel": "Telegram",
+    "email": "skzairov@gmail.com",
+    "phoneDisplay": "+996 706 330 633",
+    "whatsappHref": "https://wa.me/996706330633",
+    "telegram": "@zairov_kg",
+    "telegramHref": "https://t.me/zairov_kg"
   },
   "form": {
-    "eyebrow": "Contact",
-    "title": "Send a request",
-    "lead": "Briefly describe the task — the message goes to Telegram and we reply with next steps.",
+    "eyebrow": "Request",
+    "title": "Or send a request",
+    "lead": "Describe what you need in a few lines. We reply with detail and a next step.",
     "name": "Name",
     "namePlaceholder": "How should we address you",
     "sector": "Sector",
@@ -189,26 +260,56 @@
     "sectorGov": "Government",
     "sectorOther": "Other",
     "interest": "Interested in",
-    "interestTurnkey": "Turnkey website",
+    "interestTurnkey": "Website",
     "interestEcommerce": "Online store",
-    "interestCrm": "CRM / internal system",
+    "interestCrm": "CRM / business system",
+    "interestPos": "Retail / POS",
     "interestBots": "Telegram bot / AI assistant",
     "interestAutomation": "Integrations and automation",
     "interestSupport": "Support",
-    "interestOther": "Other / full IT solution",
+    "interestOther": "Other / full solution",
+    "choose": "Choose",
     "contact": "Phone or Telegram",
     "contactPlaceholder": "+996… or @username",
-    "message": "About the task",
-    "messagePlaceholder": "What you need and preferred timeline",
+    "message": "Task",
+    "messagePlaceholder": "What you need and the preferred timeline",
     "submit": "Send to Telegram",
     "sending": "Sending…",
     "success": "Request sent. We will contact you soon.",
-    "error": "Could not send. Try again or message us on Telegram.",
-    "required": "Required field"
+    "error": "Could not send. Try again in a minute, or message @zairov_kg on Telegram.",
+    "invalid": "Fill in the required fields.",
+    "fieldError": "Fill in this field."
   },
   "footer": {
-    "tagline": "Websites and IT solutions for business and government",
+    "tagline": "Engineering Digital Growth",
+    "note": "A request from the site arrives in Telegram.",
     "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "place": "Kyrgyzstan",
+    "privacyLabel": "Privacy policy",
+    "privacyTitle": "Privacy policy",
+    "privacyClose": "Close",
+    "privacy": [
+      {
+        "heading": "Who",
+        "body": "Sole proprietor Kutman Syradzhinovich Zairov, ZAIROV, Kyrgyzstan."
+      },
+      {
+        "heading": "What the form sends",
+        "body": "Name, sector, interest, phone or Telegram, the task, and the page language. Only what you type yourself."
+      },
+      {
+        "heading": "Why",
+        "body": "To reply to the request. The message arrives in the studio Telegram. The site does not keep a separate request database."
+      },
+      {
+        "heading": "What we do not do",
+        "body": "There is no account, no advertising trackers, and these details are not passed on for advertising."
+      },
+      {
+        "heading": "How to correct or delete",
+        "body": "Email skzairov@gmail.com."
+      }
+    ]
   }
 }

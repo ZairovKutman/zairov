@@ -2,10 +2,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// When moving to a custom domain, set base: '/' and update site.
 export default defineConfig({
-  site: 'https://zairovkutman.github.io',
-  base: '/zairov',
+  site: 'https://zairov.kg',
+  base: '/',
   trailingSlash: 'always',
   i18n: {
     defaultLocale: 'ru',

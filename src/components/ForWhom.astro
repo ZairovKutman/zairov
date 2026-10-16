@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
 
 interface Props {
   t: Dictionary;
@@ -8,49 +9,67 @@ interface Props {
 const { t } = Astro.props;
 ---
 
-<section class="section" id="for-whom">
+<section class="section section--paper" id="solutions">
   <div class="container">
-    <p class="section__eyebrow">{t.forWhom.eyebrow}</p>
-    <h2 class="section__title">{t.forWhom.title}</h2>
-    <p class="section__lead">{t.forWhom.lead}</p>
-    <div class="forwhom">
-      <article class="forwhom__card">
-        <h3>{t.forWhom.privateTitle}</h3>
-        <p>{t.forWhom.privateText}</p>
-      </article>
-      <article class="forwhom__card">
-        <h3>{t.forWhom.govTitle}</h3>
-        <p>{t.forWhom.govText}</p>
-      </article>
-    </div>
+    <SectionIntro index="03" eyebrow={t.solutions.eyebrow} title={t.solutions.title} lead={t.solutions.lead} />
+    <ol class="solutions">
+      {
+        t.solutions.items.map((item, index) => (
+          <li data-reveal style={`--d:${index * 50}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.fit}</p>
+            </div>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>
 
 <style>
-  .forwhom {
+  .solutions {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  .solutions li {
     display: grid;
-    gap: 1rem;
+    gap: 0.35rem 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--paper-line);
   }
 
-  .forwhom__card {
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-soft);
+  .solutions span {
+    font-family: var(--font-display);
+    color: var(--signal);
+    font-size: 0.85rem;
   }
 
-  .forwhom__card h3 {
-    margin-bottom: 0.55rem;
-    font-size: 1.25rem;
+  .solutions h3 {
+    font-size: 1.35rem;
   }
 
-  .forwhom__card p {
-    color: var(--color-text-muted);
+  .solutions li > div p {
+    color: var(--paper-muted);
+    font-size: 0.92rem;
+    font-weight: 600;
   }
 
-  @media (min-width: 768px) {
-    .forwhom {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .solutions li > p {
+    color: var(--paper-muted);
+    max-width: 38rem;
+  }
+
+  @media (min-width: 800px) {
+    .solutions li {
+      grid-template-columns: 3rem minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+      align-items: baseline;
+      padding-block: 1.45rem;
     }
   }
 </style>

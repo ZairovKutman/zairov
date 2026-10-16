@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Production is https://zairov.kg on Hetzner. This workflow no longer
+# runs on every push; trigger it manually only if Pages is still needed.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

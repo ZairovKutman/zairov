@@ -2,9 +2,9 @@
 
 Визитка / портфолио IT-студии **zairov**: сайты под ключ, магазины, CRM, Telegram-боты, интеграции и сопровождение для частного и гос. сектора.
 
-- Стек: Astro 5 + TypeScript
+- Стек: Astro 7 + TypeScript
 - Языки: RU (default) / KY / EN
-- Хостинг: GitHub Pages (`base: /zairov`)
+- Продакшен: https://zairov.kg
 - Заявки: Cloudflare Worker → Telegram
 
 ## Требования
@@ -17,9 +17,9 @@ npm install
 npm run dev
 ```
 
-Сайт: http://localhost:4321/zairov/
+Сайт: http://localhost:4321/
 
-Языки: `/zairov/` (RU), `/zairov/ky/`, `/zairov/en/`
+Языки: `/` (RU), `/ky/`, `/en/`
 
 ```bash
 npm run build
@@ -55,23 +55,18 @@ PUBLIC_FORM_ENDPOINT=https://zairov-leads.<subdomain>.workers.dev
 
 5. Для GitHub Actions добавьте repository variable `PUBLIC_FORM_ENDPOINT` с тем же URL.
 
-## Деплой GitHub Pages
+## Деплой
 
-Репозиторий: https://github.com/ZairovKutman/zairov  
-Сайт: https://zairovkutman.github.io/zairov/
+Продакшен: https://zairov.kg (`site` и `base: '/'` уже заданы в `astro.config.mjs`).
 
-Workflow `.github/workflows/deploy.yml` публикует Pages из ветки `main`.
+Локальная проверка сборки:
 
-## Свой домен позже
-
-В `astro.config.mjs`:
-
-```js
-site: 'https://zairov.kg',
-base: '/',
+```bash
+npm run build
+npm run preview
 ```
 
-Обновите sitemap/robots и `ALLOWED_ORIGINS` у Worker.
+GitHub Pages workflow (`.github/workflows/deploy.yml`) запускается только вручную. На production его не публикует.
 
 ## ИП
 

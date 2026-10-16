@@ -1,0 +1,250 @@
+---
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<div class:list={['study', `study--${id}`]} aria-hidden="true">
+  <span class="study__label">{label}</span>
+  {
+    id === 'ustamaster' && (
+      <div class="plate plate--split">
+        <div class="rows">
+          <i /><i /><i /><i />
+        </div>
+        <div class="side"></div>
+      </div>
+    )
+  }
+  {
+    id === 'yogamammy' && (
+      <div class="plate plate--studio">
+        <div class="ring"></div>
+        <div class="slots">
+          <i /><i /><i />
+        </div>
+      </div>
+    )
+  }
+  {
+    id === 'toloykon' && (
+      <div class="plate plate--cols">
+        <div class="bar"></div>
+        <div class="cols">
+          <i /><i /><i />
+        </div>
+      </div>
+    )
+  }
+  {
+    id === 'hidden' && (
+      <div class="plate plate--contour">
+        <span /><span /><span /><span /><span />
+      </div>
+    )
+  }
+  {
+    id === 'fitness' && (
+      <div class="plate plate--crm">
+        <div class="rail">
+          <i /><i /><i />
+        </div>
+        <div class="table">
+          <b></b>
+          <i /><i /><i /><i />
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .study {
+    position: relative;
+    min-height: 11.5rem;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(to right, rgba(154, 215, 234, 0.14) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(154, 215, 234, 0.14) 1px, transparent 1px),
+      var(--bg-raise);
+    background-size: 28px 28px, 28px 28px, auto;
+    overflow: hidden;
+  }
+
+  .study__label {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.8rem;
+    z-index: 1;
+    color: var(--accent);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .plate {
+    position: absolute;
+    inset: 2.4rem 0.9rem 0.9rem;
+  }
+
+  .rows,
+  .slots,
+  .cols,
+  .table,
+  .rail {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .rows i,
+  .slots i,
+  .cols i,
+  .table i,
+  .rail i,
+  .bar,
+  .side,
+  .table b {
+    display: block;
+    background: rgba(245, 248, 250, 0.14);
+  }
+
+  .plate--split {
+    display: grid;
+    grid-template-columns: 1.4fr 0.7fr;
+    gap: 0.6rem;
+  }
+
+  .rows i {
+    height: 0.85rem;
+  }
+
+  .rows i:nth-child(2) {
+    width: 86%;
+  }
+
+  .rows i:nth-child(3) {
+    width: 72%;
+    background: var(--accent);
+    opacity: 0.85;
+  }
+
+  .rows i:nth-child(4) {
+    width: 58%;
+  }
+
+  .side {
+    background:
+      linear-gradient(160deg, transparent 0 30%, rgba(154, 215, 234, 0.45) 30% 32%, transparent 32% 55%, rgba(245, 248, 250, 0.2) 55% 57%, transparent 57%),
+      rgba(245, 248, 250, 0.05);
+  }
+
+  .plate--studio {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .ring {
+    width: min(100%, 7.5rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(154, 215, 234, 0.7);
+    border-radius: 50%;
+    margin-inline: auto;
+    box-shadow: inset 0 0 0 10px rgba(154, 215, 234, 0.08);
+  }
+
+  .slots i {
+    height: 1.15rem;
+  }
+
+  .slots i:first-child {
+    background: var(--accent);
+    opacity: 0.9;
+  }
+
+  .plate--cols {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.6rem;
+  }
+
+  .bar {
+    height: 0.7rem;
+    width: 42%;
+    background: var(--accent);
+  }
+
+  .cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cols i {
+    min-height: 4.5rem;
+  }
+
+  .cols i:nth-child(2) {
+    background: rgba(154, 215, 234, 0.28);
+  }
+
+  .plate--contour {
+    display: grid;
+    align-content: center;
+    gap: 0.55rem;
+  }
+
+  .plate--contour span {
+    display: block;
+    height: 1px;
+    background: rgba(154, 215, 234, 0.75);
+    justify-self: center;
+  }
+
+  .plate--contour span:nth-child(1) {
+    width: 38%;
+  }
+
+  .plate--contour span:nth-child(2) {
+    width: 62%;
+  }
+
+  .plate--contour span:nth-child(3) {
+    width: 88%;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .plate--contour span:nth-child(4) {
+    width: 70%;
+  }
+
+  .plate--contour span:nth-child(5) {
+    width: 46%;
+  }
+
+  .plate--crm {
+    display: grid;
+    grid-template-columns: 0.45fr 1.55fr;
+    gap: 0.55rem;
+  }
+
+  .rail i,
+  .table i {
+    height: 0.8rem;
+  }
+
+  .table b {
+    height: 0.55rem;
+    margin-bottom: 0.15rem;
+    background: var(--accent);
+    width: 36%;
+  }
+
+  .table i:nth-child(odd) {
+    width: 92%;
+  }
+</style>

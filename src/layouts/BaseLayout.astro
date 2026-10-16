@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
 import type { Locale } from '../i18n';
 import { getDictionary, locales } from '../i18n';
@@ -14,27 +15,63 @@ import Process from '../components/Process.astro';
 import About from '../components/About.astro';
 import ContactForm from '../components/ContactForm.astro';
 
+import displayFont from '@fontsource/unbounded/files/unbounded-cyrillic-500-normal.woff2?url';
+import displayLatin from '@fontsource/unbounded/files/unbounded-latin-500-normal.woff2?url';
+import textFont from '@fontsource/onest/files/onest-cyrillic-400-normal.woff2?url';
+import textLatin from '@fontsource/onest/files/onest-latin-400-normal.woff2?url';
+
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
 const t = getDictionary(locale);
-const site = Astro.site ?? new URL('https://zairovkutman.github.io');
+const site = Astro.site ?? new URL('https://zairov.kg');
 const canonical = new URL(Astro.url.pathname, site);
 const basePath = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const localeHref = (l: Locale) =>
-  l === 'ru' ? new URL(basePath, site).href : new URL(`${basePath}${l}/`, site).href;
+const localeHref = (code: Locale) =>
+  code === 'ru' ? new URL(basePath, site).href : new URL(`${basePath}${code}/`, site).href;
+
+const ogImage = new URL(`${basePath}og.svg`, site).href;
+const preloadDisplay = locale === 'en' ? displayLatin : displayFont;
+const preloadText = locale === 'en' ? textLatin : textFont;
+
+const ogLocale = locale === 'en' ? 'en_US' : locale === 'ky' ? 'ky_KG' : 'ru_RU';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'ZAIROV',
+  url: localeHref(locale),
+  image: ogImage,
+  description: t.meta.description,
+  slogan: 'Engineering Digital Growth',
+  areaServed: { '@type': 'Country', name: 'Kyrgyzstan' },
+  address: { '@type': 'PostalAddress', addressCountry: 'KG' },
+  founder: { '@type': 'Person', name: t.about.founder },
+  email: t.contacts.email,
+  telephone: '+996706330633',
+  sameAs: [t.contacts.whatsappHref, t.contacts.telegramHref],
+  knowsLanguage: ['ru', 'ky', 'en'],
+  inLanguage: locale,
+};
 ---
 
 <!doctype html>
 <html lang={locale}>
   <head>
     <script is:inline>
-      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      (function () {
+        document.documentElement.classList.add('js');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var save = navigator.connection && navigator.connection.saveData;
+        var cores = navigator.hardwareConcurrency || 8;
+        if (!reduce && !save && cores > 2) document.documentElement.classList.add('is-rich');
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,37 +79,46 @@ const localeHref = (l: Locale) =>
     <title>{t.meta.title}</title>
     <meta name="description" content={t.meta.description} />
     <link rel="canonical" href={canonical} />
-    {locales.map((l) => <link rel="alternate" hreflang={l} href={localeHref(l)} />)}
+    {locales.map((code) => <link rel="alternate" hreflang={code} href={localeHref(code)} />)}
     <link rel="alternate" hreflang="x-default" href={localeHref('ru')} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="ZAIROV" />
     <meta property="og:title" content={t.meta.title} />
     <meta property="og:description" content={t.meta.description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(`${basePath}og.svg`, site).href} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="ZAIROV" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#0b0f14" />
     <link rel="icon" href={`${basePath}favicon.svg`} type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href={preloadDisplay} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={preloadText} as="font" type="font/woff2" crossorigin />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a class="skip" href="#content">{t.a11y.skip}</a>
     <Header locale={locale} t={t} />
-    <main>
+    <main id="content">
       <Hero t={t} />
-      <Products t={t} />
       <Values t={t} />
-      <Expertise t={t} />
-      <ForWhom t={t} />
+      <Products t={t} />
       <Cases t={t} />
+      <ForWhom t={t} />
+      <Expertise t={t} />
       <Process t={t} />
       <About t={t} />
       <ContactForm locale={locale} t={t} />
     </main>
     <Footer locale={locale} t={t} />
+    <script>
+      import '../scripts/site.ts';
+    </script>
     <script is:inline>
       (function () {
         var id = location.hash ? location.hash.slice(1) : '';

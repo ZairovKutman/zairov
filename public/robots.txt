@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zairovkutman.github.io/zairov/sitemap-index.xml
+Sitemap: https://zairov.kg/sitemap-index.xml

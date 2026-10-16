@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import Monogram from './Monogram.astro';
 
 interface Props {
   t: Dictionary;
@@ -9,94 +10,170 @@ const { t } = Astro.props;
 ---
 
 <section class="hero" id="top">
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="container hero__content">
-    <h1 class="hero__title">{t.hero.title}</h1>
-    <p class="hero__subtitle">{t.hero.subtitle}</p>
-    <p class="hero__trust">{t.hero.trust}</p>
-    <div class="hero__actions">
-      <a class="btn btn--primary" href="#contact">{t.hero.ctaPrimary}</a>
-      <a class="btn btn--ghost" href="#cases">{t.hero.ctaSecondary}</a>
+  <div class="container hero__layout">
+    <div class="hero__copy">
+      <p class="hero__line">{t.hero.line}</p>
+      <h1 class="hero__title">
+        <span>{t.hero.title[0]}</span>
+        <span>{t.hero.title[1]}</span>
+      </h1>
+      <p class="hero__subtitle">{t.hero.subtitle}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#contact">
+          {t.hero.ctaPrimary}
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--ghost" href="#cases">{t.hero.ctaSecondary}</a>
+      </div>
+    </div>
+
+    <div class="hero__stage" data-parallax>
+      <div class="hero__mesh" data-depth style="--depth: 0.28"></div>
+      <div class="hero__glow" data-depth style="--depth: 0.55"></div>
+      <div class="hero__mark" data-depth style="--depth: 1">
+        <div class="hero__mark-float">
+          <Monogram />
+        </div>
+      </div>
+      <p class="hero__fig">{t.hero.fig}</p>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    min-height: calc(100svh - var(--header-h));
     display: grid;
     align-items: center;
-    padding-block: clamp(3rem, 8vw, 6.5rem);
-    overflow: hidden;
-    scroll-margin-top: var(--header-h);
+    min-height: calc(100svh - var(--header-h));
+    padding-block: clamp(1.75rem, 4vw, 3.5rem);
+    overflow: clip;
   }
 
-  .hero__glow {
-    position: absolute;
-    inset: 8% -18% auto 28%;
-    height: min(28rem, 70%);
-    background:
-      radial-gradient(circle at 30% 40%, rgba(61, 143, 173, 0.32), transparent 58%),
-      radial-gradient(circle at 80% 20%, rgba(232, 238, 246, 0.06), transparent 45%);
-    filter: blur(10px);
-    pointer-events: none;
-    animation: drift 14s var(--ease-out) infinite alternate;
+  .hero__layout {
+    display: grid;
+    gap: 1.25rem;
+    align-items: center;
   }
 
-  .hero__content {
-    position: relative;
-    max-width: 46rem;
+  .hero__line {
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   .hero__title {
-    font-size: clamp(1.7rem, 4.2vw, 3rem);
-    max-width: 16ch;
-    margin-bottom: 1.1rem;
-    animation: rise 800ms var(--ease-out) 80ms both;
+    font-size: clamp(2.15rem, 4.6vw, 4.35rem);
+    max-width: 16em;
+    margin-bottom: 1.15rem;
+  }
+
+  .hero__title span {
+    display: block;
   }
 
   .hero__subtitle {
-    max-width: 38rem;
-    color: var(--color-text-muted);
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
-    margin-bottom: 1rem;
-    animation: rise 850ms var(--ease-out) 120ms both;
-  }
-
-  .hero__trust {
-    display: inline-block;
-    margin-bottom: 1.85rem;
-    color: var(--color-accent);
-    font-size: 0.95rem;
-    font-weight: 600;
-    animation: rise 900ms var(--ease-out) 160ms both;
+    max-width: 34rem;
+    margin-bottom: 1.6rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    animation: rise 950ms var(--ease-out) 200ms both;
+    gap: 0.7rem;
   }
 
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .hero__stage {
+    --dx: 0;
+    --dy: 0;
+    position: relative;
+    height: 15.5rem;
+    touch-action: pan-y;
   }
 
-  @keyframes drift {
+  .hero__mesh,
+  .hero__glow,
+  .hero__mark {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__mesh {
+    background-image:
+      linear-gradient(to right, rgba(154, 215, 234, 0.16) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(154, 215, 234, 0.16) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse at 50% 46%, #000 18%, transparent 72%);
+    transform: translate3d(calc(var(--dx) * var(--depth) * 1px), calc(var(--dy) * var(--depth) * 1px), 0);
+  }
+
+  .hero__glow {
+    background: radial-gradient(ellipse at 48% 42%, rgba(154, 215, 234, 0.34), rgba(154, 215, 234, 0.05) 46%, transparent 70%);
+    transform: translate3d(calc(var(--dx) * var(--depth) * 1px), calc(var(--dy) * var(--depth) * 1px), 0);
+  }
+
+  .hero__mark {
+    transform: translate3d(calc(var(--dx) * var(--depth) * 1px), calc(var(--dy) * var(--depth) * 1px), 0);
+  }
+
+  .hero__mark-float {
+    height: 100%;
+  }
+
+  .hero__fig {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  html.is-rich .hero__mark-float {
+    will-change: transform;
+    animation: floaty 9s var(--ease) infinite alternate;
+  }
+
+  .hero.is-quiet .hero__mark-float {
+    animation-play-state: paused;
+    will-change: auto;
+  }
+
+  @keyframes floaty {
     from {
       transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translate3d(-3%, -2%, 0);
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  @media (max-width: 389px) {
+    .hero__actions .btn {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .hero__layout {
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 2rem;
+    }
+
+    .hero__title {
+      max-width: 12ch;
+    }
+
+    .hero__stage {
+      height: min(40rem, calc(100svh - 8rem));
+      min-height: 32rem;
     }
   }
 </style>

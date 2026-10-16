@@ -4,5 +4,5 @@
     <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
   </g>
   <rect x="54" y="13" width="1" height="22" fill="currentColor" opacity="0.35"/>
-  <text x="68" y="33" fill="currentColor" font-family="Syne, Figtree, Avenir Next, Segoe UI, sans-serif" font-size="25" font-weight="700" letter-spacing="0.06em">zairov</text>
+  <text x="68" y="33" fill="currentColor" font-family="Unbounded, Onest, Segoe UI, sans-serif" font-size="25" font-weight="700" letter-spacing="0.06em">zairov</text>
 </svg>

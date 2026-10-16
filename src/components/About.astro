@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
 
 interface Props {
   t: Dictionary;
@@ -8,43 +9,106 @@ interface Props {
 const { t } = Astro.props;
 ---
 
-<section class="section" id="about">
-  <div class="container about">
+<section class="section about" id="about">
+  <div class="about__mark" aria-hidden="true">Z</div>
+  <div class="container about__grid">
     <div>
-      <p class="section__eyebrow">{t.about.eyebrow}</p>
-      <h2 class="section__title">{t.about.title}</h2>
-      <p class="about__text">{t.about.text}</p>
+      <SectionIntro index="06" eyebrow={t.about.eyebrow} title={t.about.title} />
+      <p class="about__text" data-reveal>{t.about.text}</p>
+      <p class="about__legal" data-reveal>{t.about.legal}</p>
     </div>
-    <aside class="about__legal">
-      <p>{t.about.legal}</p>
-    </aside>
+    <ol class="about__points">
+      {
+        t.about.points.map((point, index) => (
+          <li data-reveal style={`--d:${index * 60}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{point.title}</h3>
+              <p>{point.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>
 
 <style>
   .about {
+    overflow: clip;
+  }
+
+  .about__mark {
+    position: absolute;
+    right: -0.08em;
+    top: -0.12em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(154, 215, 234, 0.28);
+    font-family: var(--font-display);
+    font-size: clamp(14rem, 32vw, 28rem);
+    font-weight: 500;
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .about__grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .about__text {
-    max-width: 44rem;
-    color: var(--color-text-muted);
+    max-width: 40rem;
+    color: var(--muted);
     font-size: 1.08rem;
   }
 
   .about__legal {
-    padding: 1.25rem 1.35rem;
-    border-left: 3px solid var(--color-accent);
-    background: var(--color-accent-soft);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    font-weight: 600;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
     max-width: 28rem;
+    font-weight: 600;
   }
 
-  @media (min-width: 900px) {
-    .about {
-      grid-template-columns: 1.5fr 1fr;
+  .about__points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .about__points li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about__points span {
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+  }
+
+  .about__points h3 {
+    margin-bottom: 0.3rem;
+    font-size: 1.15rem;
+  }
+
+  .about__points p {
+    color: var(--muted);
+  }
+
+  @media (min-width: 960px) {
+    .about__grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
       align-items: end;
     }
   }

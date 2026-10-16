@@ -92,6 +92,8 @@ const INTEREST_LABEL: Record<string, string> = {
   turnkey: 'Сайт под ключ',
   landing: 'Сайт под ключ',
   ecommerce: 'Интернет-магазин',
+  pos: 'Retail / POS',
+  retail: 'Retail / POS',
   crm: 'CRM / внутренняя система',
   bots: 'Telegram-бот / AI-ассистент',
   aibots: 'Telegram-бот / AI-ассистент',

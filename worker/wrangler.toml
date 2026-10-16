@@ -6,7 +6,7 @@ compatibility_date = "2025-08-01"
 #   wrangler secret put TELEGRAM_BOT_TOKEN
 #   wrangler secret put TELEGRAM_CHAT_ID
 # Optional var:
-#   ALLOWED_ORIGINS = "https://zairovkutman.github.io,http://localhost:4321,http://127.0.0.1:4321"
+#   ALLOWED_ORIGINS = "https://zairov.kg,http://localhost:4321,http://127.0.0.1:4321"
 
 [vars]
-ALLOWED_ORIGINS = "https://zairovkutman.github.io,http://localhost:4321,http://127.0.0.1:4321"
+ALLOWED_ORIGINS = "https://zairov.kg,http://localhost:4321,http://127.0.0.1:4321"

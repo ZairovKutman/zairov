@@ -1,5 +1,6 @@
 ---
 import type { Dictionary, Locale } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
 
 interface Props {
   locale: Locale;
@@ -10,60 +11,118 @@ const { locale, t } = Astro.props;
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 ---
 
-<section class="section" id="contact">
-  <div class="container contact">
-    <div>
-      <p class="section__eyebrow">{t.form.eyebrow}</p>
-      <h2 class="section__title">{t.form.title}</h2>
-      <p class="section__lead">{t.form.lead}</p>
+<section class="section section--paper contact" id="contact">
+  <div class="container contact__grid">
+    <div class="channels">
+      <SectionIntro index="07" eyebrow={t.contacts.eyebrow} title={t.contacts.title} lead={t.contacts.lead} />
+      <ul class="channels__list">
+        <li>
+          <a href={`mailto:${t.contacts.email}`}>
+            <span>{t.contacts.emailLabel}</span>
+            <strong>{t.contacts.email}</strong>
+          </a>
+        </li>
+        <li>
+          <a href={t.contacts.whatsappHref} target="_blank" rel="noopener noreferrer">
+            <span>{t.contacts.whatsappLabel}</span>
+            <strong>{t.contacts.phoneDisplay}</strong>
+            <span class="sr-only">. {t.a11y.external}</span>
+          </a>
+        </li>
+        <li>
+          <a href={t.contacts.telegramHref} target="_blank" rel="noopener noreferrer">
+            <span>{t.contacts.telegramLabel}</span>
+            <strong>{t.contacts.telegram}</strong>
+            <span class="sr-only">. {t.a11y.external}</span>
+          </a>
+        </li>
+      </ul>
     </div>
 
+    <div class="form-panel">
+      <h3 class="form-panel__title">{t.form.title}</h3>
+      <p class="form-panel__lead">{t.form.lead}</p>
     <form class="form" data-contact-form novalidate>
       <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <input type="hidden" name="locale" value={locale} />
 
-      <label class="form__field">
+      <label class="field">
         <span>{t.form.name}</span>
-        <input name="name" type="text" required maxlength="80" placeholder={t.form.namePlaceholder} />
+        <input
+          name="name"
+          type="text"
+          required
+          maxlength="80"
+          autocomplete="name"
+          placeholder={t.form.namePlaceholder}
+          aria-describedby="err-name"
+        />
+        <small id="err-name" class="field__error" data-error-for="name"></small>
       </label>
 
-      <label class="form__field">
+      <label class="field">
         <span>{t.form.sector}</span>
-        <select name="sector" required>
+        <select name="sector" required aria-describedby="err-sector">
+          <option value="" selected disabled>{t.form.choose}</option>
           <option value="private">{t.form.sectorPrivate}</option>
           <option value="gov">{t.form.sectorGov}</option>
           <option value="other">{t.form.sectorOther}</option>
         </select>
+        <small id="err-sector" class="field__error" data-error-for="sector"></small>
       </label>
 
-      <label class="form__field">
+      <label class="field">
         <span>{t.form.interest}</span>
-        <select name="interest" required>
+        <select name="interest" required aria-describedby="err-interest">
+          <option value="" selected disabled>{t.form.choose}</option>
           <option value="turnkey">{t.form.interestTurnkey}</option>
           <option value="ecommerce">{t.form.interestEcommerce}</option>
           <option value="crm">{t.form.interestCrm}</option>
+          <option value="pos">{t.form.interestPos}</option>
           <option value="bots">{t.form.interestBots}</option>
           <option value="automation">{t.form.interestAutomation}</option>
           <option value="support">{t.form.interestSupport}</option>
           <option value="other">{t.form.interestOther}</option>
         </select>
+        <small id="err-interest" class="field__error" data-error-for="interest"></small>
       </label>
 
-      <label class="form__field">
+      <label class="field">
         <span>{t.form.contact}</span>
-        <input name="contact" type="text" required maxlength="80" placeholder={t.form.contactPlaceholder} />
+        <input
+          name="contact"
+          type="text"
+          required
+          maxlength="80"
+          autocomplete="tel"
+          placeholder={t.form.contactPlaceholder}
+          aria-describedby="err-contact"
+        />
+        <small id="err-contact" class="field__error" data-error-for="contact"></small>
       </label>
 
-      <label class="form__field form__field--full">
+      <label class="field field--full">
         <span>{t.form.message}</span>
-        <textarea name="message" rows="4" required maxlength="2000" placeholder={t.form.messagePlaceholder}></textarea>
+        <textarea
+          name="message"
+          rows="5"
+          required
+          maxlength="2000"
+          placeholder={t.form.messagePlaceholder}
+          aria-describedby="err-message"
+        ></textarea>
+        <small id="err-message" class="field__error" data-error-for="message"></small>
       </label>
 
       <div class="form__actions">
-        <button class="btn btn--primary" type="submit" data-submit>{t.form.submit}</button>
+        <button class="btn btn--primary" type="submit" data-submit>
+          {t.form.submit}
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </button>
         <p class="form__status" data-status role="status" aria-live="polite"></p>
       </div>
     </form>
+    </div>
   </div>
 </section>
 
@@ -74,18 +133,59 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     errorText: t.form.error,
     sendingText: t.form.sending,
     submitText: t.form.submit,
+    invalidText: t.form.invalid,
+    fieldError: t.form.fieldError,
   }}
 >
   const form = document.querySelector('[data-contact-form]');
-  if (!(form instanceof HTMLFormElement)) {
-    // no-op
-  } else {
+  if (form instanceof HTMLFormElement) {
     const status = form.querySelector('[data-status]');
     const submit = form.querySelector('[data-submit]');
+    const controls = [...form.querySelectorAll('input, select, textarea')].filter((el) => {
+      if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement)) {
+        return false;
+      }
+      return el.type !== 'hidden' && !el.classList.contains('hp');
+    });
+
+    const showError = (el, message) => {
+      const name = el.getAttribute('name') || '';
+      const error = form.querySelector(`[data-error-for="${name}"]`);
+      el.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (error) error.textContent = message;
+    };
+
+    const validate = () => {
+      let first = null;
+      let ok = true;
+      for (const el of controls) {
+        const value = String(el.value || '').trim();
+        const bad = el.hasAttribute('required') && !value;
+        showError(el, bad ? fieldError : '');
+        if (bad) {
+          ok = false;
+          if (!first) first = el;
+        }
+      }
+      if (first) first.focus();
+      return ok;
+    };
+
+    form.addEventListener('input', (event) => {
+      const target = event.target;
+      if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement || target instanceof HTMLTextAreaElement) {
+        if (String(target.value || '').trim()) showError(target, '');
+      }
+      if (status instanceof HTMLElement && status.dataset.state === 'error' && form.dataset.sending !== 'true') {
+        status.textContent = '';
+        status.dataset.state = '';
+      }
+    });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!(status instanceof HTMLElement) || !(submit instanceof HTMLButtonElement)) return;
+      if (form.dataset.sending === 'true') return;
 
       const data = new FormData(form);
       if (String(data.get('company') || '').trim()) {
@@ -95,7 +195,9 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
         return;
       }
 
-      if (!form.reportValidity()) {
+      if (!validate()) {
+        status.textContent = invalidText;
+        status.dataset.state = 'error';
         return;
       }
 
@@ -105,7 +207,11 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
         return;
       }
 
+      form.dataset.sending = 'true';
       submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      form.setAttribute('aria-busy', 'true');
+      const arrow = submit.querySelector('.btn__arrow');
       submit.textContent = sendingText;
       status.textContent = '';
       status.dataset.state = '';
@@ -130,12 +236,17 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
         status.textContent = successText;
         status.dataset.state = 'ok';
         form.reset();
+        controls.forEach((el) => showError(el, ''));
       } catch {
         status.textContent = errorText;
         status.dataset.state = 'error';
       } finally {
+        form.dataset.sending = 'false';
         submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+        form.removeAttribute('aria-busy');
         submit.textContent = submitText;
+        if (arrow) submit.append(arrow);
       }
     });
   }
@@ -143,46 +254,135 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 
 <style>
   .contact {
+    box-shadow: inset 0 4px 0 var(--accent);
+  }
+
+  .contact__grid {
     display: grid;
-    gap: 1.5rem;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .channels__list {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  .channels__list a {
+    display: grid;
+    gap: 0.2rem;
+    min-height: 4.25rem;
+    align-content: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-line);
+    color: var(--paper-ink);
+  }
+
+  .channels__list a span {
+    color: var(--signal);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .channels__list a strong {
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+  }
+
+  .channels__list a:hover strong {
+    color: var(--signal);
+  }
+
+  .form-panel__title {
+    margin-bottom: 0.45rem;
+    font-size: 1.45rem;
+  }
+
+  .form-panel__lead {
+    margin-bottom: 1.25rem;
+    color: var(--paper-muted);
+    max-width: 36rem;
   }
 
   .form {
     display: grid;
-    gap: 1rem;
-    padding: 1.35rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: rgba(18, 24, 33, 0.85);
-    box-shadow: var(--shadow-soft);
+    gap: 0.9rem;
   }
 
-  .form__field {
+  .field {
     display: grid;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
-  .form__field span {
+  .field span {
     font-size: 0.92rem;
     font-weight: 600;
   }
 
-  .form__field input,
-  .form__field select,
-  .form__field textarea {
+  .field input,
+  .field select,
+  .field textarea {
     width: 100%;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background: var(--color-bg);
-    padding: 0.8rem 0.9rem;
+    min-height: 2.9rem;
+    border: 1px solid var(--paper-line);
+    border-radius: 0;
+    background: #fff;
+    color: var(--paper-ink);
+    padding: 0.75rem 0.85rem;
+    font-size: 1rem;
     outline: none;
   }
 
-  .form__field input:focus,
-  .form__field select:focus,
-  .form__field textarea:focus {
-    border-color: rgba(61, 143, 173, 0.7);
-    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  .field textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 2.2rem;
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      calc(100% - 18px) 55%,
+      calc(100% - 12px) 55%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #5c6b78;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--signal);
+    box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.16);
+  }
+
+  .field input[aria-invalid='true'],
+  .field select[aria-invalid='true'],
+  .field textarea[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+
+  .field__error {
+    min-height: 1rem;
+    color: var(--danger);
+    font-size: 0.85rem;
+  }
+
+  .field__error:empty {
+    display: none;
   }
 
   .form__actions {
@@ -190,37 +390,52 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     gap: 0.75rem;
   }
 
+  .form__actions .btn {
+    width: 100%;
+  }
+
+  .form__status {
+    min-height: 1.5rem;
+  }
+
   .form__status[data-state='ok'] {
-    color: var(--color-success);
+    color: var(--ok);
+    font-weight: 600;
   }
 
   .form__status[data-state='error'] {
-    color: #f0a0a0;
+    color: var(--danger);
+    font-weight: 600;
   }
 
   .hp {
     position: absolute;
     left: -9999px;
+    width: 1px;
+    height: 1px;
     opacity: 0;
-    height: 0;
-    width: 0;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 700px) {
     .form {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
     }
 
-    .form__field--full,
+    .field--full,
     .form__actions {
       grid-column: 1 / -1;
     }
+
+    .form__actions .btn {
+      width: auto;
+      justify-self: start;
+    }
   }
 
-  @media (min-width: 960px) {
-    .contact {
-      grid-template-columns: 0.9fr 1.1fr;
-      align-items: start;
+  @media (min-width: 1000px) {
+    .contact__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
     }
   }
 </style>

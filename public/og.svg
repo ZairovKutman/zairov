@@ -1,9 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <rect width="1200" height="630" fill="#0b0f14"/>
-  <circle cx="980" cy="120" r="280" fill="#3d8fad" opacity="0.22"/>
-  <g fill="#e8eef6" transform="translate(108 168) scale(5.4)">
+  <g stroke="rgba(154,215,234,0.28)" stroke-width="1">
+    <path d="M72 72h36M90 54v36"/>
+    <path d="M1128 72h-36M1110 54v36"/>
+    <path d="M72 558h36M90 540v36"/>
+    <path d="M1128 558h-36M1110 540v36"/>
+  </g>
+  <g fill="#1b5a72" transform="translate(788 174) scale(7)">
     <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
   </g>
-  <text x="120" y="480" fill="#e8eef6" font-family="Syne, Avenir Next, Segoe UI, sans-serif" font-size="88" font-weight="700" letter-spacing="4">zairov</text>
-  <text x="120" y="536" fill="#9aabbe" font-family="Figtree, Segoe UI, sans-serif" font-size="30">сайты и IT-решения под ключ</text>
+  <g fill="#e7f6fb" transform="translate(760 150) scale(7)">
+    <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
+  </g>
+  <text x="84" y="300" fill="#f5f8fa" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" letter-spacing="10">ZAIROV</text>
+  <text x="88" y="370" fill="#9ad7ea" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="3">ENGINEERING DIGITAL GROWTH</text>
+  <text x="88" y="500" fill="#c3ced8" font-family="Arial, Helvetica, sans-serif" font-size="24">Kyrgyzstan · since 2020</text>
 </svg>

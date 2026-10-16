@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
 
 interface Props {
   t: Dictionary;
@@ -10,64 +11,87 @@ const { t } = Astro.props;
 
 <section class="section" id="expertise">
   <div class="container">
-    <p class="section__eyebrow">{t.expertise.eyebrow}</p>
-    <h2 class="section__title">{t.expertise.title}</h2>
-    <p class="section__lead">{t.expertise.lead}</p>
-    <div class="expertise">
+    <SectionIntro index="04" eyebrow={t.expertise.eyebrow} title={t.expertise.title} lead={t.expertise.lead} />
+    <ol class="spec">
       {
         t.expertise.items.map((item, index) => (
-          <article class="expertise__item">
-            <span class="expertise__index">0{index + 1}</span>
+          <li data-reveal style={`--d:${index * 50}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
-          </article>
+          </li>
         ))
       }
-    </div>
+    </ol>
   </div>
 </section>
 
 <style>
-  .expertise {
+  .spec {
+    list-style: none;
     display: grid;
-    gap: 1rem;
+    gap: 0;
+    margin: 2rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
   }
 
-  .expertise__item {
+  .spec li {
     display: grid;
-    gap: 0.45rem;
-    padding: 1.25rem 0;
-    border-top: 1px solid var(--color-border);
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .expertise__item:last-child {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .expertise__index {
+  .spec span {
+    color: var(--accent);
     font-family: var(--font-display);
-    color: var(--color-accent);
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 0.85rem;
   }
 
-  .expertise__item h3 {
-    font-size: 1.3rem;
+  .spec h3 {
+    font-size: 1.25rem;
   }
 
-  .expertise__item p {
-    color: var(--color-text-muted);
-    max-width: 36rem;
+  .spec p {
+    color: var(--muted);
   }
 
-  @media (min-width: 900px) {
-    .expertise {
+  @media (min-width: 800px) {
+    .spec {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 2rem;
     }
 
-    .expertise__item:nth-child(2) {
-      border-top: 1px solid var(--color-border);
+    .spec li {
+      padding: 1.4rem 1.4rem 1.4rem 0;
+    }
+
+    .spec li:nth-child(odd) {
+      border-right: 1px solid var(--line);
+      padding-right: 1.4rem;
+    }
+
+    .spec li:nth-child(even) {
+      padding-left: 1.4rem;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .spec {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .spec li,
+    .spec li:nth-child(odd),
+    .spec li:nth-child(even) {
+      border-right: 1px solid var(--line);
+      border-bottom: 0;
+      padding: 1.4rem 1rem 0 0;
+    }
+
+    .spec li:last-child {
+      border-right: 0;
     }
   }
 </style>
