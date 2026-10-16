@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "ZAIROV — technology that moves business",
-    "description": "Websites, CRM, retail and POS, AI assistants and integrations for business and the public sector. Kyrgyzstan, since 2020. Sole proprietor Kutman Zairov."
+    "title": "ZAIROV — we turn ideas into digital products",
+    "description": "Digital engineering studio in Kyrgyzstan. Websites, CRM, POS systems and AI solutions for business and the public sector. Since 2020. Sole proprietor Kutman Zairov."
   },
   "nav": {
     "home": "ZAIROV — home",
@@ -22,12 +22,12 @@
     "external": "opens in a new tab"
   },
   "hero": {
-    "line": "Engineering Digital Growth",
-    "title": ["We build technology", "that moves business"],
-    "subtitle": "Websites, digital platforms and software systems — from idea through launch and growth.",
+    "badge": "Digital Engineering Studio",
+    "title": ["We turn ideas", "into digital products"],
+    "subtitle": "We build websites, CRM, POS systems and AI solutions for your business.",
     "ctaPrimary": "Discuss a project",
-    "ctaSecondary": "View projects",
-    "fig": "Fig. 01 · Kyrgyzstan · since 2020"
+    "ctaSecondary": "Our projects",
+    "fig": "Kyrgyzstan · since 2020"
   },
   "trust": {
     "label": "Facts",
@@ -40,8 +40,8 @@
   },
   "services": {
     "eyebrow": "Services",
-    "title": "What we build",
-    "lead": "Six practices. Each one answers a business problem, not a single screen.",
+    "title": "Engineering practices",
+    "lead": "Websites, CRM, POS, AI and integrations — as working systems, not a set of screens.",
     "discuss": "Discuss",
     "items": [
       {
@@ -90,8 +90,8 @@
   },
   "work": {
     "eyebrow": "Work",
-    "title": "Work you can open",
-    "lead": "Public websites and one internal system. Status is stated as it is.",
+    "title": "Selected Work",
+    "lead": "Real products. Status is stated as it is: live, or an internal system.",
     "visit": "Open website",
     "internal": "Internal product",
     "study": "Interface study",
@@ -212,11 +212,16 @@
     ]
   },
   "about": {
-    "eyebrow": "Why ZAIROV",
-    "title": "One line of responsibility",
-    "text": "Since 2020 we have built websites and software systems for private business and the public sector. We cover the cycle from interface and architecture through engineering, integrations and support. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with a contract and ownership of the outcome.",
+    "eyebrow": "About",
+    "title": "Digital products for business and government",
+    "text": "ZAIROV is an engineering studio. Since 2020 we have designed and launched websites, CRM, POS and AI systems for private business and the public sector. One line of work: research, interface, architecture, engineering, integrations and support.",
     "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
-    "founder": "Kutman Syradzhinovich Zairov",
+    "founder": "Kutman Syradzhinovich Zairov"
+  },
+  "why": {
+    "eyebrow": "Why ZAIROV",
+    "title": "Architecture, security, ownership",
+    "lead": "The system stays whole: from the map of it through support after launch.",
     "points": [
       {
         "title": "Contract",
@@ -238,8 +243,8 @@
   },
   "contacts": {
     "eyebrow": "Contact",
-    "title": "Write directly",
-    "lead": "Email, WhatsApp or Telegram. Or use the form — the request arrives in Telegram.",
+    "title": "Ready to discuss the brief",
+    "lead": "Describe the product or process in a few lines. We reply with a next step — by email, WhatsApp or Telegram.",
     "emailLabel": "Email",
     "whatsappLabel": "WhatsApp",
     "telegramLabel": "Telegram",
