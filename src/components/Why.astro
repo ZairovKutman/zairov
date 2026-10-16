@@ -1,0 +1,154 @@
+---
+import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section why" id="why">
+  <div class="container">
+    <SectionIntro index="04" eyebrow={t.why.eyebrow} title={t.why.title} lead={t.why.lead} />
+
+    <ol class="why__points">
+      {
+        t.why.points.map((point, index) => (
+          <li data-reveal style={`--d:${index * 70}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{point.title}</h3>
+            <p>{point.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <ol class="why__spec">
+      {
+        t.expertise.items.map((item, index) => (
+          <li data-reveal style={`--d:${index * 50}ms`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .why__points {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    margin: 2.4rem 0 0;
+    padding: 0;
+  }
+
+  .why__points li {
+    padding: 1.4rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(246, 243, 251, 0.035), transparent 70%);
+  }
+
+  .why__points span {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+
+  .why__points h3 {
+    margin-bottom: 0.45rem;
+    font-size: 1.35rem;
+  }
+
+  .why__points p {
+    color: var(--muted);
+  }
+
+  .why__spec {
+    list-style: none;
+    display: grid;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .why__spec li {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .why__spec span {
+    color: var(--accent-2);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+
+  .why__spec h3 {
+    font-size: 1.15rem;
+  }
+
+  .why__spec p {
+    color: var(--muted);
+  }
+
+  @media (min-width: 800px) {
+    .why__points {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+    }
+
+    .why__spec {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .why__spec li {
+      padding: 1.4rem 1.3rem 1.4rem 0;
+    }
+
+    .why__spec li:nth-child(odd) {
+      padding-right: 1.3rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .why__spec li:nth-child(even) {
+      padding-left: 1.3rem;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .why__points li:nth-child(1) {
+      grid-column: 1;
+      min-height: 14rem;
+    }
+
+    .why__spec {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+    }
+
+    .why__spec li,
+    .why__spec li:nth-child(odd),
+    .why__spec li:nth-child(even) {
+      border-right: 1px solid var(--line);
+      border-bottom: 0;
+      padding: 1.5rem 1.1rem 0 0;
+    }
+
+    .why__spec li:last-child {
+      border-right: 0;
+    }
+  }
+</style>
