@@ -23,6 +23,7 @@ const languages: { code: Locale; label: string }[] = [
         class:list={['lang__link', { 'is-active': lang.code === locale }]}
         href={`${base}${localizePath(lang.code)}`}
         hreflang={lang.code}
+        lang={lang.code}
         data-lang-href={`${base}${localizePath(lang.code)}`}
         aria-current={lang.code === locale ? 'page' : undefined}
       >
@@ -60,20 +61,6 @@ const languages: { code: Locale; label: string }[] = [
     });
   };
 
-  const saved = sessionStorage.getItem(STORAGE_KEY);
-  if (saved && !window.location.hash) {
-    sessionStorage.removeItem(STORAGE_KEY);
-    try {
-      const { id } = JSON.parse(saved) as { id?: string };
-      const el = id ? document.getElementById(id) : null;
-      if (el) el.scrollIntoView({ block: 'start', behavior: 'auto' });
-    } catch {
-      /* ignore */
-    }
-  } else if (saved) {
-    sessionStorage.removeItem(STORAGE_KEY);
-  }
-
   if (root) {
     syncLangHrefs();
     root.addEventListener('pointerenter', syncLangHrefs);
@@ -94,27 +81,28 @@ const languages: { code: Locale; label: string }[] = [
 <style>
   .lang {
     display: inline-flex;
-    gap: 0.15rem;
-    padding: 0.2rem;
-    border: 1px solid var(--color-border);
+    gap: 0.1rem;
+    padding: 0.18rem;
+    border: 1px solid var(--line);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.02);
   }
 
   .lang__link {
-    min-width: 2.4rem;
-    padding: 0.35rem 0.55rem;
+    min-width: 2.35rem;
+    padding: 0.38rem 0.5rem;
     border-radius: 999px;
     text-align: center;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--muted);
   }
 
   .lang__link.is-active,
   .lang__link:hover {
-    color: var(--color-text);
-    background: var(--color-accent-soft);
+    color: var(--text);
+    background: rgba(104, 136, 255, 0.16);
   }
 </style>

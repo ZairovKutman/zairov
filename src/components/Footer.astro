@@ -1,5 +1,6 @@
 ---
 import type { Dictionary, Locale } from '../i18n';
+import { contacts } from '../data/contacts';
 import Logo from './Logo.astro';
 
 interface Props {
@@ -11,82 +12,120 @@ const { t } = Astro.props;
 const year = new Date().getFullYear();
 
 const links = [
-  { href: '#products', label: t.nav.products },
-  { href: '#cases', label: t.nav.cases },
-  { href: '#contact', label: t.nav.contact },
+  { href: '#services', label: t.nav.services },
+  { href: '#work', label: t.nav.work },
+  { href: '#solutions', label: t.nav.solutions },
+  { href: '#about', label: t.nav.about },
+  { href: '#contact', label: t.nav.discuss },
+];
+
+const channels = [
+  { href: contacts.email.href, label: t.channels.email, value: contacts.email.value },
+  { href: contacts.whatsapp.href, label: t.channels.whatsapp, value: contacts.whatsapp.value, external: true },
+  { href: contacts.telegram.href, label: t.channels.telegram, value: contacts.telegram.value, external: true },
 ];
 ---
 
 <footer class="footer">
-  <div class="container footer__inner">
+  <div class="container footer__grid">
     <div class="footer__brand">
       <Logo />
+      <p class="footer__name">{t.brand.name}</p>
       <p>{t.footer.tagline}</p>
-      <nav class="footer__nav" aria-label="Footer">
-        {
-          links.map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))
-        }
-      </nav>
+      <p>{t.footer.location}</p>
     </div>
+
+    <nav class="footer__nav" aria-label={t.nav.footer}>
+      {
+        links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </nav>
+
     <div class="footer__meta">
-      <p>{t.footer.legal}</p>
-      <p>© {year} zairov. {t.footer.rights}</p>
+      {
+        channels.map((item) => (
+          <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined}>
+            {item.label}: {item.value}
+          </a>
+        ))
+      }
     </div>
+  </div>
+
+  <div class="container footer__legal">
+    <p>{t.footer.legal}</p>
+    <p>© {year} {t.brand.name}. {t.footer.rights}</p>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: 1px solid var(--color-border);
-    padding-block: var(--space-7);
-    background: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(3rem, 6vw, 5rem) 2rem;
+    background: var(--bg-deep);
   }
 
-  .footer__inner {
+  .footer__grid {
     display: grid;
-    gap: 1.75rem;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
   }
 
   .footer__brand {
     display: grid;
-    gap: 0.85rem;
-    color: var(--color-text-muted);
-    max-width: 30rem;
+    gap: 0.75rem;
+    color: var(--muted);
+    max-width: 28rem;
   }
 
-  .footer__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem 1.25rem;
+  .footer__name {
+    color: var(--text);
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
   }
 
-  .footer__nav a {
-    color: var(--color-text);
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  .footer__nav a:hover {
-    color: var(--color-accent);
-  }
-
+  .footer__nav,
   .footer__meta {
     display: grid;
-    gap: 0.35rem;
-    color: var(--color-text-muted);
-    font-size: 0.92rem;
+    gap: 0.7rem;
+    align-content: start;
   }
 
-  @media (min-width: 768px) {
-    .footer__inner {
-      grid-template-columns: 1.5fr 1fr;
-      align-items: end;
-      justify-content: space-between;
+  .footer__nav a,
+  .footer__meta a {
+    color: var(--text);
+    font-weight: 650;
+  }
+
+  .footer__nav a:hover,
+  .footer__meta a:hover {
+    color: var(--accent);
+  }
+
+  .footer__legal {
+    display: grid;
+    gap: 0.35rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 860px) {
+    .footer__grid {
+      grid-template-columns: 1.4fr 0.7fr 1fr;
+      align-items: start;
     }
 
-    .footer__meta {
+    .footer__legal {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__legal p:last-child {
       text-align: right;
     }
   }

@@ -1,0 +1,118 @@
+---
+import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="about">
+  <div class="why-bg" aria-hidden="true">Z</div>
+  <div class="container">
+    <div class="why">
+      <div>
+        <SectionIntro index={t.why.index} eyebrow={t.why.eyebrow} title={t.why.title} />
+        <p class="why__text" data-reveal>{t.why.text}</p>
+        <p class="why__legal" data-reveal>{t.why.legal}</p>
+      </div>
+      <ol class="why__list">
+        {
+          t.why.items.map((item, index) => (
+            <li data-reveal style={`--d:${index * 40}ms`}>
+              <span>0{index + 1}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    overflow: hidden;
+  }
+
+  .why-bg {
+    position: absolute;
+    right: -4vw;
+    top: 8%;
+    font-size: clamp(12rem, 28vw, 28rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.8;
+    color: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .why {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .why__text {
+    max-width: 40rem;
+    color: var(--muted);
+    font-size: 1.06rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .why__legal {
+    width: fit-content;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid var(--accent);
+    background: rgba(104, 136, 255, 0.08);
+    font-weight: 700;
+  }
+
+  .why__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+
+  .why__list li {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 0.8rem;
+    padding: 1.15rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .why__list li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .why__list span {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .why__list h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.15rem;
+  }
+
+  .why__list p {
+    color: var(--muted);
+  }
+
+  @media (min-width: 980px) {
+    .why {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+</style>

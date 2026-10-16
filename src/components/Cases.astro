@@ -1,31 +1,123 @@
 ---
 import type { Dictionary } from '../i18n';
+import { caseLayouts, type CaseId } from '../data/contacts';
+import SectionIntro from './SectionIntro.astro';
+import CaseVisual from './CaseVisual.astro';
 
 interface Props {
   t: Dictionary;
 }
 
 const { t } = Astro.props;
+
+const items = t.cases.items.map((item) => ({
+  ...item,
+  layout: caseLayouts[item.id as CaseId] ?? 'split',
+}));
+
+const featured = items.filter((item) => item.layout === 'feature');
+const split = items.filter((item) => item.layout === 'split');
+const rest = items.filter((item) => item.layout === 'wide' || item.layout === 'compact');
 ---
 
-<section class="section" id="cases">
+<section class="section" id="work">
   <div class="container">
-    <p class="section__eyebrow">{t.cases.eyebrow}</p>
-    <h2 class="section__title">{t.cases.title}</h2>
-    <p class="section__lead">{t.cases.lead}</p>
-    <div class="cases">
+    <SectionIntro index={t.cases.index} eyebrow={t.cases.eyebrow} title={t.cases.title} lead={t.cases.lead} />
+
+    <div class="work">
       {
-        t.cases.items.map((item) => (
-          <article class="case">
-            <h3>{item.name}</h3>
-            <p>{item.text}</p>
-            {item.url ? (
-              <a class="case__link" href={item.url} target="_blank" rel="noopener noreferrer">
-                {item.url.replace(/^https?:\/\//, '')}
-              </a>
-            ) : (
-              <span class="case__meta">{t.cases.internal}</span>
-            )}
+        featured.map((item) => (
+          <article class="work__feature" data-reveal>
+            <CaseVisual id={item.id} label={t.cases.visualLabel} />
+            <div class="work__copy">
+              <p class="work__meta">
+                <span>{item.category}</span>
+                <span>{item.url ? t.cases.live : t.cases.internal}</span>
+              </p>
+              <h3 class="display display--md">{item.name}</h3>
+              <p>{item.text}</p>
+              <p class="work__solves">
+                <strong>{t.cases.solvesLabel}</strong>
+                {item.solves}
+              </p>
+              {item.url ? (
+                <a class="link" href={item.url} target="_blank" rel="noopener noreferrer">
+                  {t.cases.visit}
+                  <span class="sr-only">, {item.name}. {t.cases.newTab}</span>
+                  <span class="link__arrow" aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <span class="work__internal">{t.cases.internal}</span>
+              )}
+            </div>
+          </article>
+        ))
+      }
+
+      <div class="work__split">
+        {
+          split.map((item, index) => (
+            <article class="work__card" data-reveal style={`--d:${index * 70}ms`}>
+              <CaseVisual id={item.id} label={t.cases.visualLabel} />
+              <div class="work__copy">
+                <p class="work__meta">
+                  <span>{item.category}</span>
+                  <span>{item.url ? t.cases.live : t.cases.internal}</span>
+                </p>
+                <h3>{item.name}</h3>
+                <p>{item.text}</p>
+                <p class="work__solves">
+                  <strong>{t.cases.solvesLabel}</strong>
+                  {item.solves}
+                </p>
+                {item.url ? (
+                  <a class="link" href={item.url} target="_blank" rel="noopener noreferrer">
+                    {t.cases.visit}
+                    <span class="sr-only">
+                      , {item.name}. {t.cases.newTab}
+                    </span>
+                    <span class="link__arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                ) : (
+                  <span class="work__internal">{t.cases.internal}</span>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        rest.map((item) => (
+          <article class:list={['work__row', item.layout === 'wide' && 'work__row--wide']} data-reveal>
+            <CaseVisual id={item.id} label={t.cases.visualLabel} />
+            <div class="work__copy">
+              <p class="work__meta">
+                <span>{item.category}</span>
+                <span>{item.url ? t.cases.live : t.cases.internal}</span>
+              </p>
+              <h3>{item.name}</h3>
+              <p>{item.text}</p>
+              <p class="work__solves">
+                <strong>{t.cases.solvesLabel}</strong>
+                {item.solves}
+              </p>
+              {item.url ? (
+                <a class="link" href={item.url} target="_blank" rel="noopener noreferrer">
+                  {t.cases.visit}
+                  <span class="sr-only">
+                    , {item.name}. {t.cases.newTab}
+                  </span>
+                  <span class="link__arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                </a>
+              ) : (
+                <span class="work__internal">{t.cases.internal}</span>
+              )}
+            </div>
           </article>
         ))
       }
@@ -34,57 +126,95 @@ const { t } = Astro.props;
 </section>
 
 <style>
-  .cases {
+  .work {
     display: grid;
-    gap: 1rem;
+    gap: 1.15rem;
   }
 
-  .case {
+  .work__feature,
+  .work__card,
+  .work__row {
     display: grid;
-    gap: 0.55rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .work__copy {
+    display: grid;
     align-content: start;
-    padding: 1.4rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.02);
-    min-height: 11rem;
-    transition: border-color 200ms var(--ease-out);
+    gap: 0.75rem;
+    padding: 1.4rem 1.35rem 1.55rem;
   }
 
-  .case:hover {
-    border-color: rgba(61, 143, 173, 0.4);
+  .work__copy p:not(.work__meta):not(.work__solves) {
+    color: var(--muted);
   }
 
-  .case h3 {
-    font-size: 1.25rem;
+  .work__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
-  .case p {
-    color: var(--color-text-muted);
+  .work__meta span:last-child {
+    color: var(--accent);
   }
 
-  .case__link {
-    margin-top: auto;
-    color: var(--color-accent);
-    font-weight: 600;
-    width: fit-content;
-    border-bottom: 1px solid transparent;
+  .work__copy h3 {
+    font-size: clamp(1.35rem, 2vw, 1.9rem);
   }
 
-  .case__link:hover {
-    border-bottom-color: currentColor;
+  .work__solves {
+    color: var(--text);
+    font-size: 0.98rem;
   }
 
-  .case__meta {
-    margin-top: auto;
-    color: var(--color-text-muted);
-    font-size: 0.92rem;
-    font-weight: 600;
+  .work__solves strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
   }
 
-  @media (min-width: 768px) {
-    .cases {
+  .work__internal {
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .work__split {
+    display: grid;
+    gap: 1.15rem;
+  }
+
+  @media (min-width: 900px) {
+    .work__feature {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .work__split {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .work__row {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .work__row--wide {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .work__copy {
+      padding: 1.7rem 1.6rem;
     }
   }
 </style>

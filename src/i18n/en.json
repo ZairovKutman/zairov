@@ -1,187 +1,295 @@
 {
   "meta": {
-    "title": "zairov — turnkey websites & IT solutions",
-    "description": "Websites, CRM, Telegram bots, integrations and support for private business and the public sector. Experience since 2020. Sole proprietor Kutman Zairov."
+    "title": "ZAIROV — Engineering Digital Growth",
+    "description": "Digital engineering studio from Kyrgyzstan. We build websites, CRM, POS, AI systems and integrations for business and the public sector. Since 2020. Sole proprietor Kutman Zairov."
+  },
+  "brand": {
+    "name": "ZAIROV",
+    "tagline": "Engineering Digital Growth"
   },
   "nav": {
-    "products": "Services",
-    "expertise": "Expertise",
-    "cases": "Work",
+    "services": "Services",
+    "work": "Work",
+    "solutions": "Solutions",
     "about": "About",
     "contact": "Contact",
+    "discuss": "Discuss a project",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "home": "ZAIROV — home",
+    "skip": "Skip to content",
+    "primary": "Primary navigation",
+    "mobile": "Mobile menu",
+    "footer": "Footer navigation"
   },
   "hero": {
-    "brand": "zairov",
-    "title": "Professional turnkey website development",
-    "subtitle": "We build modern, fast and effective websites and IT solutions for private business and the public sector.",
-    "trust": "Since 2020 — private & government projects",
-    "ctaPrimary": "Send a request",
-    "ctaSecondary": "View case studies"
+    "kicker": "Digital Engineering Studio",
+    "title": "We build technology that moves business.",
+    "subtitle": "Websites, digital platforms, CRM, POS and AI systems — from idea and architecture to launch and growth.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "View work",
+    "index": "00 / HERO",
+    "label": "SYSTEM MARK · Z",
+    "scroll": "Scroll",
+    "facts": [
+      { "label": "Since 2020", "value": "Kyrgyzstan" },
+      { "label": "Sectors", "value": "Business and government" },
+      { "label": "Cycle", "value": "From idea to support" }
+    ]
   },
-  "products": {
-    "eyebrow": "Services",
-    "title": "IT solutions for your goals",
-    "lead": "Websites, CRM, bots and ongoing support — full-cycle delivery.",
+  "services": {
+    "index": "01",
+    "eyebrow": "What we do",
+    "title": "Engineering that solves a business problem.",
+    "lead": "Six delivery lanes. Each one closes a real workflow, not a single screen.",
+    "discuss": "Discuss",
     "items": [
       {
         "id": "turnkey",
-        "title": "Turnkey websites",
-        "text": "Landings, corporate sites and portals — from structure to launch.",
-        "includes": ["Landing", "Corporate site", "Portal"]
-      },
-      {
-        "id": "ecommerce",
-        "title": "Online stores",
-        "text": "Cart, payments, delivery and customer accounts.",
-        "includes": ["Catalog", "Payments", "Delivery"]
+        "title": "Web development",
+        "text": "Landing pages, corporate sites and portals — from structure and interface to launch and access handoff.",
+        "tags": ["Landing", "Corporate site", "Portal"]
       },
       {
         "id": "crm",
-        "title": "CRM and internal systems",
-        "text": "Clients, bookings, statuses and company workflows.",
-        "includes": ["Client records", "Booking", "Admin panel"]
+        "title": "CRM and business systems",
+        "text": "Clients, bookings, statuses and internal company workflows in one working system with an admin panel.",
+        "tags": ["Client records", "Booking", "Admin panel"]
+      },
+      {
+        "id": "ecommerce",
+        "title": "Retail / POS",
+        "text": "Online stores, checkout and sales accounting: catalog, payments, delivery and the point of sale in one loop.",
+        "tags": ["Online store", "POS", "Payments"]
       },
       {
         "id": "bots",
-        "title": "Telegram bots and AI assistants",
-        "text": "Requests, FAQ, booking and 24/7 replies in Telegram and on the site.",
-        "includes": ["Telegram", "AI replies", "Leads"]
+        "title": "AI and automation",
+        "text": "Telegram bots and AI assistants: requests, answers and booking without waiting for an operator — in chat and on the site.",
+        "tags": ["Telegram", "AI replies", "Leads"]
       },
       {
         "id": "automation",
-        "title": "Integrations and automation",
-        "text": "Payments, SMS, messengers and connected services in one flow.",
-        "includes": ["Payments", "SMS", "API"]
+        "title": "Integrations and backend",
+        "text": "Payments, SMS, messengers and APIs — connected into one reliable server-side system.",
+        "tags": ["Payments", "SMS", "API"]
       },
       {
         "id": "support",
-        "title": "Support",
-        "text": "Updates, monitoring and growth after launch.",
-        "includes": ["Fixes", "Monitoring", "Hosting"]
+        "title": "Support and evolution",
+        "text": "Fixes, monitoring and growth after launch. The system does not stay without an owner.",
+        "tags": ["Fixes", "Monitoring", "Hosting"]
       }
     ]
-  },
-  "values": {
-    "eyebrow": "Approach",
-    "title": "How we deliver",
-    "items": [
-      {
-        "title": "Fast",
-        "text": "Speed optimization and high performance."
-      },
-      {
-        "title": "Reliable",
-        "text": "Secure code and data protection."
-      },
-      {
-        "title": "Responsive",
-        "text": "Perfect on every device."
-      },
-      {
-        "title": "Effective",
-        "text": "Websites that drive revenue."
-      }
-    ]
-  },
-  "expertise": {
-    "eyebrow": "Expertise",
-    "title": "Full delivery stack",
-    "lead": "Design, frontend, backend and architecture under one responsibility.",
-    "items": [
-      {
-        "title": "Design",
-        "text": "UI/UX and product design: structure, visuals and usability."
-      },
-      {
-        "title": "Frontend",
-        "text": "Fast interfaces, responsive layouts and clean client logic."
-      },
-      {
-        "title": "Backend",
-        "text": "APIs, databases, integrations, auth and stable server systems."
-      },
-      {
-        "title": "Architecture",
-        "text": "System design, scalability, security and long-term support."
-      }
-    ]
-  },
-  "forWhom": {
-    "eyebrow": "Audience",
-    "title": "Private & public sector",
-    "lead": "Since 2020 we have delivered for businesses and government teams — with clear process and accountable results.",
-    "privateTitle": "Private sector",
-    "privateText": "Websites, stores, CRM, bots and automation for companies and entrepreneurs.",
-    "govTitle": "Public sector",
-    "govText": "Portals, accounting systems, integrations and process digitization with transparent delivery."
   },
   "cases": {
-    "eyebrow": "Work",
-    "title": "Selected projects",
-    "lead": "Web products and systems already serving clients.",
+    "index": "02",
+    "eyebrow": "Selected work",
+    "title": "Real products. Working systems.",
+    "lead": "Public websites and one internal system. Status is factual — no invented metrics.",
     "visit": "Open website",
     "internal": "Internal product",
+    "live": "Live",
+    "newTab": "opens in a new tab",
+    "visualLabel": "Interface schematic",
+    "solvesLabel": "What it solves",
     "items": [
       {
+        "id": "ustamaster",
         "name": "UstaMaster",
-        "url": "https://ustamaster.kg",
-        "text": "A web platform to find and book local service professionals."
+        "category": "Services platform",
+        "text": "A web platform to find and book local service professionals.",
+        "solves": "Helps a client find a specialist and helps the specialist receive the job without an extra chain.",
+        "url": "https://ustamaster.kg"
       },
       {
+        "id": "yogamammy",
         "name": "YogaMammy",
-        "url": "https://yogamammy.kg",
-        "text": "Yoga studio website: services, booking and brand presentation."
+        "category": "Studio website",
+        "text": "Yoga studio website: services, booking and brand presentation.",
+        "solves": "Presents the studio and leads to a booking without extra modules the team does not need.",
+        "url": "https://yogamammy.kg"
       },
       {
+        "id": "toloykon",
         "name": "Toloykon",
-        "url": "https://toloykon.kg",
-        "text": "A business web product focused on customer convenience."
+        "category": "Business website",
+        "text": "A business web product focused on customer convenience.",
+        "solves": "Gives a clear entry into the company’s services and a next step for the visitor.",
+        "url": "https://toloykon.kg"
       },
       {
+        "id": "hidden",
+        "name": "Hidden Kyrgyzstan",
+        "category": "Travel website",
+        "text": "A site about quiet routes in Kyrgyzstan: horse trails, high lakes and yurt stays.",
+        "solves": "Gathers routes and the atmosphere of the trip into one clear story people can write about.",
+        "url": "https://hiddenkyrgyzstan.com/en"
+      },
+      {
+        "id": "fitness",
         "name": "Fitness studio CRM",
-        "url": "",
-        "text": "CRM for a fitness studio: clients, bookings and studio workflows."
+        "category": "CRM",
+        "text": "CRM for a fitness studio: clients, bookings and studio workflows.",
+        "solves": "Keeps clients, schedule and statuses in one system the studio team actually uses.",
+        "url": ""
+      }
+    ]
+  },
+  "solutions": {
+    "index": "03",
+    "eyebrow": "Solutions",
+    "title": "Built around how the day actually runs.",
+    "lead": "One engineering approach. Different product logic for each industry and working rhythm.",
+    "items": [
+      {
+        "title": "Stores and retail",
+        "text": "Storefront, order, payment, delivery and sales records in one loop — not scattered spreadsheets."
+      },
+      {
+        "title": "Cafés and restaurants",
+        "text": "Menu, requests and a guest contact point: a site and an internal loop that does not slow the shift."
+      },
+      {
+        "title": "Studios and service companies",
+        "text": "A website, booking and inbound requests for studios, specialists and service teams."
+      },
+      {
+        "title": "Education",
+        "text": "Schedule, enrolment and a clear presentation of programs — without an extra shell."
+      },
+      {
+        "title": "Corporate teams",
+        "text": "A website, CRM and internal processes the team uses every day."
+      },
+      {
+        "title": "Public institutions",
+        "text": "Portals, records and integrations. Transparent delivery and support after launch."
+      }
+    ]
+  },
+  "engineering": {
+    "index": "04",
+    "eyebrow": "Engineering",
+    "title": "The layers a product actually stands on.",
+    "lead": "Interface, server, data and connections under one responsibility. Working system layers — not a random logo wall.",
+    "items": [
+      {
+        "code": "FE",
+        "title": "Frontend",
+        "text": "Fast interfaces, responsive layouts and accessibility. What people open on a phone and at a desk."
+      },
+      {
+        "code": "BE",
+        "title": "Backend",
+        "text": "APIs, auth, business logic and a stable server side without fragile glue."
+      },
+      {
+        "code": "DB",
+        "title": "Databases",
+        "text": "Structure for real processes: clients, orders, bookings, statuses."
+      },
+      {
+        "code": "API",
+        "title": "Integrations",
+        "text": "Payments, SMS, messengers and external services — connected into one flow."
+      },
+      {
+        "code": "SEC",
+        "title": "Security",
+        "text": "Access, data protection and clear boundaries: who sees what and who owns it."
+      },
+      {
+        "code": "OPS",
+        "title": "Infrastructure",
+        "text": "Launch, hosting, monitoring and support after handoff. The system stays operational."
       }
     ]
   },
   "process": {
+    "index": "05",
     "eyebrow": "Process",
-    "title": "How a project runs",
+    "title": "How a project actually runs.",
+    "lead": "Six stages. At each one it is clear what is done and what you receive.",
+    "gets": "What you get",
     "steps": [
       {
-        "title": "Brief",
-        "text": "Goals, audience, timeline and constraints."
+        "title": "Discovery",
+        "text": "Goals, constraints, audience and the definition of done. Without this, development becomes guesswork.",
+        "gets": "A clear problem statement and the boundary of the first version."
       },
       {
-        "title": "Design & architecture",
-        "text": "Product structure, interface and technical approach."
+        "title": "UX/UI Design",
+        "text": "Structure, scenarios and interface before code. You see the product while changes are still cheap.",
+        "gets": "A screen map and an agreed visual outline."
+      },
+      {
+        "title": "Architecture",
+        "text": "Data, roles, integrations and how the system will grow. Map first, then code.",
+        "gets": "A readable system map and technical decisions."
       },
       {
         "title": "Development",
-        "text": "Build, integrations and testing."
+        "text": "Interface, server side and connections. Iterations with a visible status.",
+        "gets": "A working product you can open and review."
       },
       {
-        "title": "Launch",
-        "text": "Go-live, handoff and access transfer."
+        "title": "QA & Launch",
+        "text": "Scenario checks, go-live, training and access transfer.",
+        "gets": "A live system and access in your team’s hands."
       },
       {
-        "title": "Support",
-        "text": "Iteration, monitoring and growth."
+        "title": "Support & Evolution",
+        "text": "Fixes, monitoring and growth. After handoff the product is not left alone.",
+        "gets": "A support plan and room to grow further."
       }
     ]
   },
-  "about": {
-    "eyebrow": "About",
-    "title": "zairov — software & digital solutions",
-    "text": "Since 2020 we have built websites and IT systems for private business and the public sector. We cover the full cycle: design and architecture through frontend, backend and automation. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with contracts, a clear process and ownership of outcomes.",
-    "legal": "Sole proprietor Kutman Syradzhinovich Zairov"
+  "why": {
+    "index": "06",
+    "eyebrow": "Why ZAIROV",
+    "title": "Why teams stay until the product is live.",
+    "text": "Since 2020 we have built websites and software systems for private business and the public sector. We cover the cycle from interface and architecture to development, integrations and support. We work formally as sole proprietor Kutman Syradzhinovich Zairov — with a contract and ownership of the result.",
+    "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
+    "items": [
+      {
+        "title": "Built for the business",
+        "text": "We shape the system around your process instead of forcing the business into a ready-made template."
+      },
+      {
+        "title": "Transparent stages",
+        "text": "It is clear what is happening now, what comes next and how each step ends."
+      },
+      {
+        "title": "Deliberate architecture",
+        "text": "Boundaries and connections first. Then code that can grow instead of being rewritten."
+      },
+      {
+        "title": "Room to evolve",
+        "text": "The first version is not a dead end. Modules can be added without breaking the core."
+      },
+      {
+        "title": "Support after launch",
+        "text": "Access is handed over. If the product needs to keep moving, support stays."
+      },
+      {
+        "title": "Clear communication",
+        "text": "We speak in the language of the task and do not hide behind jargon. Questions get a direct answer."
+      }
+    ]
+  },
+  "cta": {
+    "index": "07",
+    "eyebrow": "Next step",
+    "title": "Have an idea? Let’s turn it into a working product.",
+    "lead": "Write directly or send a request. The message goes to Telegram — we reply with the next step.",
+    "button": "Discuss a project",
+    "channels": "Contact"
   },
   "form": {
-    "eyebrow": "Contact",
-    "title": "Send a request",
-    "lead": "Briefly describe the task — the message goes to Telegram and we reply with next steps.",
+    "eyebrow": "Request",
+    "title": "Describe the task",
+    "lead": "Write briefly what you need. If a messenger is easier — the contacts are on the left.",
     "name": "Name",
     "namePlaceholder": "How should we address you",
     "sector": "Sector",
@@ -189,26 +297,32 @@
     "sectorGov": "Government",
     "sectorOther": "Other",
     "interest": "Interested in",
-    "interestTurnkey": "Turnkey website",
-    "interestEcommerce": "Online store",
-    "interestCrm": "CRM / internal system",
-    "interestBots": "Telegram bot / AI assistant",
-    "interestAutomation": "Integrations and automation",
-    "interestSupport": "Support",
-    "interestOther": "Other / full IT solution",
+    "interestTurnkey": "Web development",
+    "interestEcommerce": "Retail / POS",
+    "interestCrm": "CRM / business system",
+    "interestBots": "AI / Telegram bot",
+    "interestAutomation": "Integrations and backend",
+    "interestSupport": "Support and evolution",
+    "interestOther": "Other / full solution",
     "contact": "Phone or Telegram",
     "contactPlaceholder": "+996… or @username",
     "message": "About the task",
     "messagePlaceholder": "What you need and preferred timeline",
-    "submit": "Send to Telegram",
+    "submit": "Send request",
     "sending": "Sending…",
     "success": "Request sent. We will contact you soon.",
-    "error": "Could not send. Try again or message us on Telegram.",
+    "error": "Could not send. Try again or write to us directly.",
     "required": "Required field"
   },
+  "channels": {
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram"
+  },
   "footer": {
-    "tagline": "Websites and IT solutions for business and government",
+    "tagline": "Engineering Digital Growth. Websites, platforms and software systems for business and government.",
     "legal": "Sole proprietor Kutman Syradzhinovich Zairov",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "location": "Kyrgyzstan"
   }
 }
