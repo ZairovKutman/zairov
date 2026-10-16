@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import HeroMark from './HeroMark.astro';
 
 interface Props {
   t: Dictionary;
@@ -9,16 +10,44 @@ const { t } = Astro.props;
 ---
 
 <section class="hero" id="top">
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="container hero__content">
-    <h1 class="hero__title">{t.hero.title}</h1>
-    <p class="hero__subtitle">{t.hero.subtitle}</p>
-    <p class="hero__trust">{t.hero.trust}</p>
-    <div class="hero__actions">
-      <a class="btn btn--primary" href="#contact">{t.hero.ctaPrimary}</a>
-      <a class="btn btn--ghost" href="#cases">{t.hero.ctaSecondary}</a>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="container hero__layout">
+    <div class="hero__copy">
+      <p class="kicker" data-reveal>
+        <span class="kicker__index">{t.hero.index}</span>
+        <span aria-hidden="true">/</span>
+        <span>{t.hero.kicker}</span>
+      </p>
+      <h1 class="display" data-reveal style="--d:60ms">{t.hero.title}</h1>
+      <p class="hero__subtitle" data-reveal style="--d:120ms">{t.hero.subtitle}</p>
+      <div class="hero__actions" data-reveal style="--d:180ms">
+        <a class="btn btn--primary" href="#contact">
+          {t.hero.ctaPrimary}
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--ghost" href="#work">{t.hero.ctaSecondary}</a>
+      </div>
+      <dl class="hero__facts" data-reveal style="--d:240ms">
+        {
+          t.hero.facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="hero__visual" data-reveal style="--d:120ms">
+      <HeroMark index={t.hero.index} label={t.hero.label} />
     </div>
   </div>
+
+  <a class="hero__scroll" href="#services">
+    <span>{t.hero.scroll}</span>
+    <i aria-hidden="true"></i>
+  </a>
 </section>
 
 <style>
@@ -27,76 +56,108 @@ const { t } = Astro.props;
     min-height: calc(100svh - var(--header-h));
     display: grid;
     align-items: center;
-    padding-block: clamp(3rem, 8vw, 6.5rem);
+    padding-block: clamp(2.5rem, 6vw, 5.5rem) clamp(4.5rem, 8vw, 6.5rem);
     overflow: hidden;
-    scroll-margin-top: var(--header-h);
   }
 
-  .hero__glow {
+  .hero__grid {
     position: absolute;
-    inset: 8% -18% auto 28%;
-    height: min(28rem, 70%);
-    background:
-      radial-gradient(circle at 30% 40%, rgba(61, 143, 173, 0.32), transparent 58%),
-      radial-gradient(circle at 80% 20%, rgba(232, 238, 246, 0.06), transparent 45%);
-    filter: blur(10px);
+    inset: 18% 0 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 8.5rem;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+    opacity: 0.55;
     pointer-events: none;
-    animation: drift 14s var(--ease-out) infinite alternate;
   }
 
-  .hero__content {
+  .hero__layout {
     position: relative;
-    max-width: 46rem;
-  }
-
-  .hero__title {
-    font-size: clamp(1.7rem, 4.2vw, 3rem);
-    max-width: 16ch;
-    margin-bottom: 1.1rem;
-    animation: rise 800ms var(--ease-out) 80ms both;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
   }
 
   .hero__subtitle {
-    max-width: 38rem;
-    color: var(--color-text-muted);
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
-    margin-bottom: 1rem;
-    animation: rise 850ms var(--ease-out) 120ms both;
-  }
-
-  .hero__trust {
-    display: inline-block;
-    margin-bottom: 1.85rem;
-    color: var(--color-accent);
-    font-size: 0.95rem;
-    font-weight: 600;
-    animation: rise 900ms var(--ease-out) 160ms both;
+    max-width: 36rem;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.22rem);
+    margin-bottom: 1.8rem;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    animation: rise 950ms var(--ease-out) 200ms both;
+    margin-bottom: 2.25rem;
   }
 
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
+  .hero__facts {
+    display: grid;
+    gap: 1rem 1.5rem;
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero__facts dt {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+
+  .hero__facts dd {
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    left: max(1rem, calc((100% - var(--container)) / 2));
+    bottom: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__scroll i {
+    width: 1px;
+    height: 2.4rem;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+
+  @media (max-width: 959px) {
+    .hero__visual {
+      position: absolute;
+      right: -8%;
+      top: 18%;
+      width: min(58vw, 18rem);
+      opacity: 0.42;
+      pointer-events: none;
+      z-index: 0;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .hero__copy {
+      position: relative;
+      z-index: 1;
     }
   }
 
-  @keyframes drift {
-    from {
-      transform: translate3d(0, 0, 0);
+  @media (min-width: 960px) {
+    .hero__layout {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 3rem;
     }
-    to {
-      transform: translate3d(-3%, -2%, 0);
+
+    .hero__facts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

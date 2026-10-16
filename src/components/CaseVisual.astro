@@ -1,0 +1,308 @@
+---
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<div class:list={['visual', `visual--${id}`]} aria-hidden="true">
+  <span class="visual__label">{label}</span>
+
+  {
+    id === 'ustamaster' && (
+      <div class="frame frame--wide">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <div class="search"><em></em></div>
+        <div class="cards">
+          <b>
+            <s></s>
+            <s></s>
+          </b>
+          <b>
+            <s></s>
+            <s></s>
+          </b>
+          <b>
+            <s></s>
+            <s></s>
+          </b>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    id === 'yogamammy' && (
+      <div class="frame frame--studio">
+        <div class="ring"></div>
+        <div class="slots">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    id === 'toloykon' && (
+      <div class="frame frame--cols">
+        <div class="bar"></div>
+        <div class="cols">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    id === 'hidden' && (
+      <div class="frame frame--land">
+        <svg viewBox="0 0 480 220" fill="none">
+          <path d="M0 168 72 118l46 28 68-78 54 42 70-54 80 36 90-22v150H0Z" fill="rgba(104,136,255,0.16)" />
+          <path d="M0 176 80 130l40 22 70-70 50 38 74-48 76 30 90-18" stroke="#6888ff" stroke-width="1.4" />
+          <circle cx="186" cy="68" r="3.5" fill="#f8fafc" />
+          <circle cx="380" cy="86" r="3.5" fill="#9ca7b8" />
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    id === 'fitness' && (
+      <div class="frame frame--crm">
+        <div class="rail">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="table">
+          <b></b>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .visual {
+    position: relative;
+    min-height: 16rem;
+    display: grid;
+    place-items: center;
+    padding: 1.4rem;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 80% 10%, rgba(75, 108, 255, 0.16), transparent 42%),
+      linear-gradient(180deg, #141b28, #0d121c);
+    border: 1px solid var(--line);
+  }
+
+  .visual__label {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.95rem;
+    z-index: 1;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .frame {
+    width: min(100%, 28rem);
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line-strong);
+    background: rgba(8, 11, 18, 0.72);
+    padding: 0.9rem;
+  }
+
+  .chrome {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .chrome i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .search {
+    height: 1.5rem;
+    border: 1px solid var(--line);
+    margin-bottom: 0.8rem;
+    background: rgba(104, 136, 255, 0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+
+  .search em {
+    display: block;
+    width: 42%;
+    height: 0.35rem;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+    height: calc(100% - 2.8rem);
+  }
+
+  .cards b {
+    display: grid;
+    align-content: end;
+    gap: 0.35rem;
+    padding: 0.45rem;
+  }
+
+  .cards s {
+    display: block;
+    height: 0.28rem;
+    background: rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+  }
+
+  .cards b,
+  .slots i,
+  .cols i,
+  .table i,
+  .table b,
+  .rail i {
+    display: block;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--line);
+  }
+
+  .cards b:nth-child(2) {
+    background: rgba(104, 136, 255, 0.16);
+  }
+
+  .frame--studio {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 0.9rem;
+    align-items: center;
+  }
+
+  .ring {
+    width: 6.2rem;
+    height: 6.2rem;
+    margin-inline: auto;
+    border-radius: 50%;
+    border: 1px solid rgba(104, 136, 255, 0.45);
+    box-shadow: inset 0 0 0 14px rgba(104, 136, 255, 0.08);
+  }
+
+  .slots {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .slots i {
+    height: 1.55rem;
+  }
+
+  .slots i:first-child {
+    background: rgba(104, 136, 255, 0.2);
+  }
+
+  .frame--cols {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .bar {
+    height: 1.2rem;
+    background: rgba(104, 136, 255, 0.18);
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .frame--land {
+    padding: 0;
+    display: grid;
+  }
+
+  .frame--land svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .frame--crm {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.7rem;
+  }
+
+  .rail {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+  }
+
+  .rail i {
+    height: 1.15rem;
+  }
+
+  .table {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .table b {
+    height: 1.2rem;
+    background: rgba(104, 136, 255, 0.16);
+  }
+
+  .table i {
+    height: 1.05rem;
+  }
+
+  .visual--ustamaster {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(75, 108, 255, 0.2), transparent 40%),
+      linear-gradient(180deg, #151c2c, #0d121c);
+  }
+
+  .visual--yogamammy {
+    background:
+      radial-gradient(circle at 70% 30%, rgba(111, 64, 232, 0.16), transparent 42%),
+      linear-gradient(180deg, #141824, #0d121c);
+  }
+
+  .visual--hidden {
+    background:
+      radial-gradient(circle at 50% 80%, rgba(75, 108, 255, 0.18), transparent 46%),
+      linear-gradient(180deg, #101820, #0a1018);
+  }
+
+  .visual--fitness {
+    background: linear-gradient(180deg, #121826, #0c111a);
+  }
+
+  @media (min-width: 900px) {
+    .visual {
+      min-height: 20rem;
+    }
+  }
+</style>

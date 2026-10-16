@@ -8,55 +8,45 @@ const { class: className = '', variant = 'lockup' } = Astro.props;
 const isMark = variant === 'mark';
 ---
 
-<svg
-  class:list={['logo', isMark ? 'logo--mark' : 'logo--lockup', className]}
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox={isMark ? '0 0 48 48' : '0 0 272 48'}
-  width={isMark ? 36 : 182}
-  height={isMark ? 36 : 32}
-  role={isMark ? undefined : 'img'}
-  aria-hidden={isMark ? 'true' : undefined}
-  aria-label={isMark ? undefined : 'zairov'}
-  focusable="false"
->
-  {!isMark && <title>zairov</title>}
-  <g fill="currentColor">
-    <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z" />
-  </g>
+<span class:list={['logo', isMark && 'logo--mark', className]}>
+  <svg
+    class="logo__mark"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 48 48"
+    width={isMark ? 34 : 28}
+    height={isMark ? 34 : 28}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path fill="currentColor" d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"></path>
+  </svg>
   {
     !isMark && (
-      <>
-        <rect x="54" y="13" width="1" height="22" fill="currentColor" opacity="0.35" />
-        <text
-          x="68"
-          y="33"
-          fill="currentColor"
-          font-family="Syne, Figtree, Avenir Next, Segoe UI, sans-serif"
-          font-size="25"
-          font-weight="700"
-          letter-spacing="0.06em"
-        >
-          zairov
-        </text>
-      </>
+      <span class="logo__word" aria-hidden="true">
+        ZAIROV
+      </span>
     )
   }
-</svg>
+</span>
 
 <style>
   .logo {
-    display: block;
-    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--text);
     flex-shrink: 0;
   }
 
-  .logo--lockup {
-    height: 1.65rem;
-    width: auto;
+  .logo__mark {
+    display: block;
+    flex-shrink: 0;
   }
 
-  .logo--mark {
-    height: 1.8rem;
-    width: auto;
+  .logo__word {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
   }
 </style>

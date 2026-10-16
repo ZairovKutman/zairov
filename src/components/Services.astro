@@ -1,0 +1,159 @@
+---
+import type { Dictionary } from '../i18n';
+import SectionIntro from './SectionIntro.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="services">
+  <div class="container">
+    <SectionIntro
+      index={t.services.index}
+      eyebrow={t.services.eyebrow}
+      title={t.services.title}
+      lead={t.services.lead}
+    />
+
+    <ol class="services">
+      {
+        t.services.items.map((item, index) => (
+          <li class:list={['service', index === 0 && 'is-open']} data-reveal style={`--d:${index * 50}ms`}>
+            <button class="service__head" type="button" data-service-toggle aria-expanded={index === 0 ? 'true' : 'false'}>
+              <span class="service__n">0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <span class="service__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="service__body" data-service-panel hidden={index !== 0}>
+              <p>{item.text}</p>
+              <ul>
+                {item.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+              <a class="link" href="#contact" data-interest={item.id}>
+                {t.services.discuss}
+                <span class="link__arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .services {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .service {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .service__head {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3.2rem 1fr auto;
+    gap: 0.85rem;
+    align-items: center;
+    padding: 1.25rem 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .service__n {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  .service__head h3 {
+    font-size: clamp(1.2rem, 2.4vw, 1.85rem);
+  }
+
+  .service__chevron {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    transition: transform 220ms var(--ease);
+  }
+
+  .service.is-open .service__chevron {
+    transform: rotate(-135deg);
+  }
+
+  .service__body {
+    display: grid;
+    gap: 1rem;
+    padding: 0 0 1.5rem 4.05rem;
+    max-width: 42rem;
+  }
+
+  .service__body[hidden] {
+    display: none;
+  }
+
+  .service__body p {
+    color: var(--muted);
+  }
+
+  .service__body ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service__body li {
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  @media (min-width: 900px) {
+    .service {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: start;
+    }
+
+    .service__head {
+      padding-right: 2rem;
+    }
+
+    .service__body,
+    .service__body[hidden] {
+      display: grid !important;
+      padding: 1.35rem 0 1.5rem;
+      max-width: none;
+    }
+
+    .service__chevron {
+      opacity: 0;
+    }
+
+    .service:hover,
+    .service:focus-within {
+      background: rgba(255, 255, 255, 0.015);
+    }
+  }
+</style>

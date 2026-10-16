@@ -5,14 +5,13 @@ import { getDictionary, locales } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
-import Products from '../components/Products.astro';
-import Values from '../components/Values.astro';
-import Expertise from '../components/Expertise.astro';
-import ForWhom from '../components/ForWhom.astro';
+import Services from '../components/Services.astro';
 import Cases from '../components/Cases.astro';
+import Solutions from '../components/Solutions.astro';
+import Engineering from '../components/Engineering.astro';
 import Process from '../components/Process.astro';
-import About from '../components/About.astro';
-import ContactForm from '../components/ContactForm.astro';
+import Why from '../components/Why.astro';
+import Contact from '../components/Contact.astro';
 
 interface Props {
   locale: Locale;
@@ -28,6 +27,8 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
 
 const localeHref = (l: Locale) =>
   l === 'ru' ? new URL(basePath, site).href : new URL(`${basePath}${l}/`, site).href;
+
+const ogLocale = locale === 'en' ? 'en_US' : locale === 'ky' ? 'ky_KG' : 'ru_RU';
 ---
 
 <!doctype html>
@@ -45,34 +46,94 @@ const localeHref = (l: Locale) =>
     {locales.map((l) => <link rel="alternate" hreflang={l} href={localeHref(l)} />)}
     <link rel="alternate" hreflang="x-default" href={localeHref('ru')} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content={t.brand.name} />
     <meta property="og:title" content={t.meta.title} />
     <meta property="og:description" content={t.meta.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(`${basePath}og.svg`, site).href} />
-    <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content="#0b0f14" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+    <meta name="theme-color" content="#080B12" />
     <link rel="icon" href={`${basePath}favicon.svg`} type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <a class="skip-link" href="#content">{t.nav.skip}</a>
     <Header locale={locale} t={t} />
-    <main>
+    <main id="content">
       <Hero t={t} />
-      <Products t={t} />
-      <Values t={t} />
-      <Expertise t={t} />
-      <ForWhom t={t} />
+      <Services t={t} />
       <Cases t={t} />
+      <Solutions t={t} />
+      <Engineering t={t} />
       <Process t={t} />
-      <About t={t} />
-      <ContactForm locale={locale} t={t} />
+      <Why t={t} />
+      <Contact locale={locale} t={t} />
     </main>
     <Footer locale={locale} t={t} />
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const reveal = () => {
+        const nodes = document.querySelectorAll('[data-reveal]');
+        if (reduce) {
+          nodes.forEach((el) => el.classList.add('is-in'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        );
+        nodes.forEach((el) => io.observe(el));
+      };
+
+      const services = () => {
+        document.querySelectorAll('[data-service-toggle]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const item = button.closest('.service');
+            const panel = item?.querySelector('[data-service-panel]');
+            if (!(button instanceof HTMLButtonElement) || !(panel instanceof HTMLElement) || !item) return;
+            const open = button.getAttribute('aria-expanded') !== 'true';
+            button.setAttribute('aria-expanded', String(open));
+            panel.hidden = !open;
+            item.classList.toggle('is-open', open);
+          });
+        });
+        document.querySelector('.service')?.classList.add('is-open');
+      };
+
+      const process = () => {
+        const root = document.querySelector('[data-process]');
+        if (!root) return;
+        const tabs = [...root.querySelectorAll('[data-process-tab]')];
+        const panels = [...root.querySelectorAll('[data-process-panel]')];
+        tabs.forEach((tab, index) => {
+          tab.addEventListener('click', () => {
+            tabs.forEach((el, i) => el.setAttribute('aria-selected', String(i === index)));
+            panels.forEach((panel, i) => {
+              if (panel instanceof HTMLElement) panel.hidden = i !== index;
+            });
+          });
+        });
+      };
+
+      reveal();
+      services();
+      process();
+    </script>
     <script is:inline>
       (function () {
         var id = location.hash ? location.hash.slice(1) : '';

@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#0b0f14"/>
-  <circle cx="980" cy="120" r="280" fill="#3d8fad" opacity="0.22"/>
-  <g fill="#e8eef6" transform="translate(108 168) scale(5.4)">
+  <rect width="1200" height="630" fill="#080B12"/>
+  <circle cx="980" cy="90" r="280" fill="#4B6CFF" opacity="0.22"/>
+  <circle cx="1080" cy="420" r="220" fill="#6F40E8" opacity="0.16"/>
+  <g fill="#F8FAFC" transform="translate(108 150) scale(5.6)">
     <path d="M7 9h34v8H7V9Zm19 7h15L19 32H7L26 16ZM7 31.2h34V40H7v-8.8Z"/>
   </g>
-  <text x="120" y="480" fill="#e8eef6" font-family="Syne, Avenir Next, Segoe UI, sans-serif" font-size="88" font-weight="700" letter-spacing="4">zairov</text>
-  <text x="120" y="536" fill="#9aabbe" font-family="Figtree, Segoe UI, sans-serif" font-size="30">сайты и IT-решения под ключ</text>
+  <text x="120" y="470" fill="#F8FAFC" font-family="Manrope, Avenir Next, Segoe UI, sans-serif" font-size="86" font-weight="800" letter-spacing="6">ZAIROV</text>
+  <text x="120" y="530" fill="#9CA7B8" font-family="Manrope, Segoe UI, sans-serif" font-size="28">Engineering Digital Growth</text>
 </svg>
