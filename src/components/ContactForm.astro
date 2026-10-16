@@ -11,7 +11,7 @@ const { locale, t } = Astro.props;
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 ---
 
-<section class="section section--paper contact" id="contact">
+<section class="section contact" id="contact">
   <div class="container contact__grid">
     <div class="channels">
       <SectionIntro index="07" eyebrow={t.contacts.eyebrow} title={t.contacts.title} lead={t.contacts.lead} />
@@ -254,7 +254,9 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 
 <style>
   .contact {
-    box-shadow: inset 0 4px 0 var(--accent);
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.22), transparent 42%),
+      var(--bg-2);
   }
 
   .contact__grid {
@@ -267,7 +269,7 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     list-style: none;
     margin: 1.75rem 0 0;
     padding: 0;
-    border-top: 1px solid var(--paper-line);
+    border-top: 1px solid var(--line);
   }
 
   .channels__list a {
@@ -276,12 +278,12 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     min-height: 4.25rem;
     align-content: center;
     padding: 0.85rem 0;
-    border-bottom: 1px solid var(--paper-line);
-    color: var(--paper-ink);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
   }
 
   .channels__list a span {
-    color: var(--signal);
+    color: var(--accent);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -295,7 +297,15 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
   }
 
   .channels__list a:hover strong {
-    color: var(--signal);
+    color: var(--accent);
+  }
+
+  .form-panel {
+    padding: 1.4rem 1.2rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 1.5rem;
+    background: rgba(27, 11, 50, 0.7);
+    box-shadow: 0 24px 60px rgba(8, 2, 18, 0.35);
   }
 
   .form-panel__title {
@@ -305,7 +315,7 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 
   .form-panel__lead {
     margin-bottom: 1.25rem;
-    color: var(--paper-muted);
+    color: var(--muted);
     max-width: 36rem;
   }
 
@@ -329,11 +339,11 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
   .field textarea {
     width: 100%;
     min-height: 2.9rem;
-    border: 1px solid var(--paper-line);
-    border-radius: 0;
-    background: #fff;
-    color: var(--paper-ink);
-    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: rgba(246, 243, 251, 0.04);
+    color: var(--ink);
+    padding: 0.75rem 0.9rem;
     font-size: 1rem;
     outline: none;
   }
@@ -354,19 +364,19 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
       calc(100% - 12px) 55%;
     background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
-    background-color: #fff;
+    background-color: rgba(246, 243, 251, 0.04);
   }
 
   .field input::placeholder,
   .field textarea::placeholder {
-    color: #5c6b78;
+    color: #8d84a3;
   }
 
   .field input:focus,
   .field select:focus,
   .field textarea:focus {
-    border-color: var(--signal);
-    box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.16);
+    border-color: rgba(196, 181, 253, 0.7);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.22);
   }
 
   .field input[aria-invalid='true'],
@@ -419,6 +429,10 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
   @media (min-width: 700px) {
     .form {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .form-panel {
+      padding: 1.8rem 1.7rem 1.85rem;
     }
 
     .field--full,

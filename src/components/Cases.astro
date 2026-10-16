@@ -15,9 +15,25 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
 
 <section class="section" id="cases">
   <div class="container">
-    <SectionIntro index="02" eyebrow={t.work.eyebrow} title={t.work.title} lead={t.work.lead} />
+    <SectionIntro index="03" eyebrow={t.work.eyebrow} title={t.work.title} lead={t.work.lead} />
 
     <article class="feature" data-reveal>
+      {
+        lead.url ? (
+          <figure class="shot">
+            <img
+              src={`${import.meta.env.BASE_URL}work/${lead.id}.webp`}
+              alt={lead.name}
+              width="1200"
+              height="750"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+        ) : (
+          <Study id={lead.id} label={t.work.study} />
+        )
+      }
       <div class="feature__copy">
         <p class="feature__meta">
           <span>01</span>
@@ -30,7 +46,9 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
           lead.url ? (
             <a class="link" href={lead.url} target="_blank" rel="noopener noreferrer">
               {t.work.visit}
-              <span class="sr-only">, {lead.name}. {t.a11y.external}</span>
+              <span class="sr-only">
+                , {lead.name}. {t.a11y.external}
+              </span>
               <span class="link__arrow" aria-hidden="true">↗</span>
             </a>
           ) : (
@@ -38,45 +56,27 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
           )
         }
       </div>
-      {
-        lead.url ? (
-          <figure class="shot">
-            <img
-              src={`${import.meta.env.BASE_URL}work/${lead.id}.webp`}
-              alt={lead.name}
-              width="1200"
-              height="750"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        ) : (
-          <Study id={lead.id} label={t.work.study} />
-        )
-      }
     </article>
 
     <div class="work">
       {
         rest.map((item, index) => (
           <article class="work__item" data-reveal style={`--d:${index * 70}ms`}>
-            {
-              item.url ? (
-                <figure class="shot">
-                  <img
-                    src={`${import.meta.env.BASE_URL}work/${item.id}.webp`}
-                    alt={item.name}
-                    width="1200"
-                    height="750"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : (
-                <Study id={item.id} label={t.work.study} />
-              )
-            }
-            <div>
+            {item.url ? (
+              <figure class="shot">
+                <img
+                  src={`${import.meta.env.BASE_URL}work/${item.id}.webp`}
+                  alt={item.name}
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            ) : (
+              <Study id={item.id} label={t.work.study} />
+            )}
+            <div class="work__copy">
               <p class="work__meta">
                 <span>{String(index + 2).padStart(2, '0')}</span>
                 <span>{item.kind}</span>
@@ -87,7 +87,9 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
               {item.url ? (
                 <a class="link" href={item.url} target="_blank" rel="noopener noreferrer">
                   {t.work.visit}
-                  <span class="sr-only">, {item.name}. {t.a11y.external}</span>
+                  <span class="sr-only">
+                    , {item.name}. {t.a11y.external}
+                  </span>
                   <span class="link__arrow" aria-hidden="true">↗</span>
                 </a>
               ) : (
@@ -104,10 +106,17 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
 <style>
   .feature {
     display: grid;
-    gap: 1.25rem;
+    gap: 0;
     margin-top: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1.5rem;
+    background: var(--bg-raise);
+  }
+
+  .feature__copy,
+  .work__copy {
+    padding: 1.4rem 1.35rem 1.5rem;
   }
 
   .feature__meta,
@@ -115,11 +124,11 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem 0.8rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.75rem;
     color: var(--muted);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
@@ -131,7 +140,7 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
 
   .feature__name {
     margin-bottom: 0.8rem;
-    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
     max-width: 12ch;
   }
 
@@ -150,26 +159,28 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
 
   .work {
     display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .work__item {
     display: grid;
-    gap: 1rem;
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1.35rem;
+    background: rgba(27, 11, 50, 0.55);
   }
 
   .work__name {
     margin-bottom: 0.45rem;
-    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    font-size: clamp(1.6rem, 2.4vw, 2.15rem);
   }
 
   .shot {
     margin: 0;
     aspect-ratio: 16 / 10;
-    border: 1px solid var(--line);
     overflow: hidden;
-    background: var(--bg-raise);
+    background: #0a0314;
   }
 
   .shot img {
@@ -178,48 +189,43 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
     height: 100%;
     object-fit: cover;
     object-position: top center;
+    transition: transform 700ms var(--ease);
   }
 
-  .work__item:hover :global(.study),
-  .feature:hover :global(.study),
-  .work__item:hover .shot,
-  .feature:hover .shot {
-    border-color: rgba(154, 215, 234, 0.55);
+  .work__item:hover .shot img,
+  .feature:hover .shot img {
+    transform: scale(1.035);
   }
 
   @media (min-width: 800px) {
     .feature {
-      grid-template-columns: minmax(0, 1.05fr) minmax(16rem, 0.95fr);
-      gap: 2rem;
-      align-items: end;
-      padding-bottom: 2.5rem;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: 28rem;
     }
 
-    .work {
-      grid-template-columns: 1fr 1fr;
+    .feature__copy {
+      display: grid;
+      align-content: end;
+      padding: 2rem 2rem 2.1rem 1.8rem;
+    }
+
+    .feature .shot {
+      min-height: 100%;
+      aspect-ratio: auto;
     }
 
     .work__item {
-      padding: 1.75rem 1.5rem 1.75rem 0;
+      grid-template-columns: 1.05fr 0.95fr;
     }
 
-    .work__item:nth-child(odd) {
-      padding-right: 1.5rem;
-      border-right: 1px solid var(--line);
+    .work__item:nth-child(even) .shot {
+      order: 2;
     }
 
-    .work__item:nth-child(even) {
-      padding-left: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1100px) {
-    .feature :global(.study) {
-      min-height: 22rem;
-    }
-
-    .work__item :global(.study) {
-      min-height: 13rem;
+    .work__copy {
+      display: grid;
+      align-content: center;
+      padding: 1.8rem;
     }
   }
 </style>
