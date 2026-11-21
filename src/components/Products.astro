@@ -1,6 +1,7 @@
 ---
 import type { Dictionary } from '../i18n';
 import SectionIntro from './SectionIntro.astro';
+import ServiceIcon from './ServiceIcon.astro';
 
 interface Props {
   t: Dictionary;
@@ -16,7 +17,9 @@ const { t } = Astro.props;
       {
         t.services.items.map((item, index) => (
           <li class={`service service--${item.id}`} data-reveal style={`--d:${index * 70}ms`}>
-            <div class="service__visual" aria-hidden="true"></div>
+            <div class="service__visual" aria-hidden="true">
+              <ServiceIcon id={item.id} />
+            </div>
             <div class="service__body">
               <span class="service__n">{String(index + 1).padStart(2, '0')}</span>
               <h3>{item.title}</h3>
@@ -104,113 +107,51 @@ const { t } = Astro.props;
 
   .service__visual {
     position: relative;
-    min-height: 4.8rem;
-    border-radius: 0.9rem;
-    background: rgba(246, 243, 251, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 10.5rem;
+    padding: 1rem;
     overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(196, 181, 253, 0.18);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.38), transparent 64%),
+      linear-gradient(180deg, rgba(246, 243, 251, 0.06), rgba(16, 5, 30, 0.35));
   }
 
-  .service__visual::before,
-  .service__visual::after {
+  .service__visual::before {
     content: '';
     position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(246, 243, 251, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(246, 243, 251, 0.055) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse at 50% 45%, #000 12%, transparent 74%);
+    pointer-events: none;
   }
 
-  .service--sites .service__visual::before {
-    inset: 0.7rem 0.8rem auto;
-    height: 0.45rem;
-    width: 42%;
-    border-radius: 99px;
-    background: #fff;
-  }
-
-  .service--sites .service__visual::after {
-    inset: 1.5rem 0.8rem 0.7rem;
-    border: 1px solid rgba(246, 243, 251, 0.2);
-    border-radius: 0.4rem;
-    background: linear-gradient(180deg, rgba(91, 140, 255, 0.35), transparent);
-  }
-
-  .service--crm .service__visual {
-    background:
-      linear-gradient(to bottom, rgba(246, 243, 251, 0.12) 1px, transparent 1px) 0 18px / 100% 18px,
-      rgba(246, 243, 251, 0.03);
-  }
-
-  .service--crm .service__visual::before {
-    left: 0.8rem;
-    top: 0.7rem;
-    width: 28%;
-    height: 0.4rem;
-    border-radius: 99px;
-    background: var(--accent-3);
-  }
-
-  .service--retail .service__visual {
-    background:
-      linear-gradient(to right, rgba(246, 243, 251, 0.08) 1px, transparent 1px) 0 0 / 33% 100%,
-      linear-gradient(to bottom, rgba(246, 243, 251, 0.08) 1px, transparent 1px) 0 0 / 100% 50%,
-      rgba(246, 243, 251, 0.03);
-  }
-
-  .service--retail .service__visual::after {
-    right: 12%;
-    bottom: 18%;
-    width: 22%;
-    aspect-ratio: 1;
-    border-radius: 0.35rem;
-    background: var(--accent-2);
-  }
-
-  .service--ai .service__visual::before {
-    inset: 50% auto auto 50%;
-    width: 3.4rem;
-    height: 3.4rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fff 0 18%, rgba(232, 74, 255, 0.55) 18% 42%, transparent 43%);
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 32px rgba(232, 74, 255, 0.45);
-  }
-
-  .service--integrations .service__visual::before,
-  .service--integrations .service__visual::after {
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .service--integrations .service__visual::before {
-    left: 18%;
-    top: 38%;
-    box-shadow:
-      4.5rem -0.6rem 0 var(--accent-2),
-      2.2rem 1.1rem 0 #fff;
-  }
-
-  .service--integrations .service__visual::after {
-    left: 22%;
-    right: 22%;
-    top: 48%;
-    height: 1px;
+  .service__visual :global(.service-icon) {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
     width: auto;
-    background: rgba(246, 243, 251, 0.28);
+    height: 7.25rem;
+    max-width: 100%;
+    aspect-ratio: 200 / 120;
+    filter: drop-shadow(0 12px 24px rgba(91, 140, 255, 0.16));
   }
 
-  .service--support .service__visual::before {
-    inset: 0.85rem 1.1rem;
-    border: 1px solid rgba(196, 181, 253, 0.55);
-    border-radius: 1.1rem 1.1rem 1.4rem 1.4rem;
-  }
+  @media (prefers-reduced-motion: no-preference) {
+    .service__visual :global(.service-icon) {
+      transition: transform 280ms var(--ease);
+    }
 
-  .service--support .service__visual::after {
-    left: 50%;
-    top: 42%;
-    width: 36%;
-    height: 0.35rem;
-    border-radius: 99px;
-    background: var(--ok);
-    transform: translateX(-50%);
+    .service:hover .service__visual :global(.service-icon),
+    .service:focus-within .service__visual :global(.service-icon) {
+      transform: translateY(-3px);
+    }
   }
 
   @media (min-width: 800px) {
@@ -227,6 +168,11 @@ const { t } = Astro.props;
 
     .service--sites .service__visual {
       min-height: 100%;
+    }
+
+    .service--sites .service__visual :global(.service-icon) {
+      width: min(100%, 17rem);
+      height: auto;
     }
   }
 
