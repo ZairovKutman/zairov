@@ -101,7 +101,7 @@
       {
         "id": "ustamaster",
         "name": "UstaMaster",
-        "url": "https://ustamaster.kg",
+        "url": "https://ustamaster.zairov.kg",
         "text": "Усталарды издөө жана кызмат заказ кылуу үчүн веб-платформа.",
         "kind": "Кызмат платформасы",
         "status": "live"
@@ -109,7 +109,7 @@
       {
         "id": "yogamammy",
         "name": "YogaMammy",
-        "url": "https://yogamammy.kg",
+        "url": "https://yogamammy.zairov.kg",
         "text": "Йога студиясынын сайты: кызматтар, жазылуу жана бренд.",
         "kind": "Студия сайты",
         "status": "live"
@@ -117,7 +117,7 @@
       {
         "id": "toloykon",
         "name": "Toloykon",
-        "url": "https://toloykon.kg",
+        "url": "https://toloykon.zairov.kg",
         "text": "Кардарларга ыңгайлуулукка багытталган бизнес веб-чечим.",
         "kind": "Бизнес сайты",
         "status": "live"
