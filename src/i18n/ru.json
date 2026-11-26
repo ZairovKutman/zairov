@@ -131,10 +131,18 @@
         "status": "live"
       },
       {
+        "id": "retail",
+        "name": "ZAIROV Retail",
+        "url": "https://retail.zairov.kg",
+        "text": "Касса, учёт товаров и админка для розницы.",
+        "kind": "Retail и POS",
+        "status": "live"
+      },
+      {
         "id": "fitness",
-        "name": "CRM для fitness studio",
+        "name": "Fitness CRM",
         "url": "",
-        "text": "CRM-система для фитнес-студии: клиенты, записи и процессы студии.",
+        "text": "Админ-панель фитнес-студии: клиенты, записи и процессы.",
         "kind": "CRM",
         "status": "internal"
       }

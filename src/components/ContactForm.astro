@@ -367,6 +367,20 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     background-color: rgba(246, 243, 251, 0.04);
   }
 
+  .field select option {
+    background-color: #1b0b32;
+    color: #f6f3fb;
+  }
+
+  .field select option:checked {
+    background-color: #2a1548;
+    color: #f6f3fb;
+  }
+
+  .field select option:disabled {
+    color: #b7aec8;
+  }
+
   .field input::placeholder,
   .field textarea::placeholder {
     color: #8d84a3;

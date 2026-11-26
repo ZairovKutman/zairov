@@ -1,0 +1,544 @@
+---
+import type { Locale } from '../i18n';
+
+interface Props {
+  id: string;
+  locale: Locale;
+}
+
+const { id, locale } = Astro.props;
+
+const copy = {
+  ru: {
+    unit: 'сом',
+    plansTitle: 'Абонементы',
+    add: 'План',
+    plans: ['Месяц', '12 визитов', 'Безлимит'],
+    prices: ['2 500', '4 800', '6 900'],
+    status: 'активен',
+  },
+  en: {
+    unit: 'KGS',
+    plansTitle: 'Plans',
+    add: 'Plan',
+    plans: ['Month', '12 visits', 'Unlimited'],
+    prices: ['2 500', '4 800', '6 900'],
+    status: 'active',
+  },
+  ky: {
+    unit: 'сом',
+    plansTitle: 'Абонемент',
+    add: 'План',
+    plans: ['Айлык', '12 жолу', 'Чексиз'],
+    prices: ['2 500', '4 800', '6 900'],
+    status: 'активдүү',
+  },
+}[locale];
+
+const retail = {
+  ru: {
+    kicker: 'Программа для магазина в Кыргызстане',
+    title: ['Ваш магазин под контролем.', 'Даже без интернета.'],
+    button: 'Написать в WhatsApp',
+    brand: 'ZAIROV Retail',
+    meta: 'Учебный магазин · Касса 1',
+    sync: 'Очередь ждёт сеть',
+    products: [
+      { name: 'Хлеб', price: '45' },
+      { name: 'Молоко 1 л', price: '70' },
+    ],
+    receipt: 'Чек',
+    count: '3 товара',
+    total: 'Итого',
+    sum: '195',
+    pay: 'К оплате',
+    unit: 'сом',
+  },
+  en: {
+    kicker: 'Store software for Kyrgyzstan',
+    title: ['Your shop stays in control.', 'Even without the internet.'],
+    button: 'Message on WhatsApp',
+    brand: 'ZAIROV Retail',
+    meta: 'Demo shop · Register 1',
+    sync: 'Queue waits for network',
+    products: [
+      { name: 'Bread', price: '45' },
+      { name: 'Milk 1 L', price: '70' },
+    ],
+    receipt: 'Receipt',
+    count: '3 items',
+    total: 'Total',
+    sum: '195',
+    pay: 'To pay',
+    unit: 'KGS',
+  },
+  ky: {
+    kicker: 'Кыргызстандагы дүкөн үчүн программа',
+    title: ['Дүкөнүңүз көзөмөлдө.', 'Интернет жок кезде да.'],
+    button: 'WhatsApp’ка жазуу',
+    brand: 'ZAIROV Retail',
+    meta: 'Үлгү дүкөн · Касса 1',
+    sync: 'Кезек тармакты күтөт',
+    products: [
+      { name: 'Нан', price: '45' },
+      { name: 'Сүт 1 л', price: '70' },
+    ],
+    receipt: 'Чек',
+    count: '3 товар',
+    total: 'Жыйынтык',
+    sum: '195',
+    pay: 'Төлөмгө',
+    unit: 'сом',
+  },
+}[locale];
+---
+
+<div class:list={['frame', `frame--${id}`]} aria-hidden="true">
+  {
+    id === 'retail' && (
+      <div class="retail">
+        <div class="retail__copy">
+          <div class="retail__kicker">{retail.kicker}</div>
+          <div class="retail__title">
+            <span>{retail.title[0]}</span>
+            <span>{retail.title[1]}</span>
+          </div>
+          <div class="retail__btn">{retail.button}</div>
+        </div>
+        <div class="device">
+          <header class="device__bar">
+            <span class="device__badge" />
+            <span class="device__brand">
+              <strong>{retail.brand}</strong>
+              <small>{retail.meta}</small>
+            </span>
+            <span class="device__sync">{retail.sync}</span>
+          </header>
+          <div class="device__body">
+            <div class="device__tiles">
+              {retail.products.map((item) => (
+                <span class="device__tile">
+                  <strong>{item.name}</strong>
+                  <em>
+                    {item.price} {retail.unit}
+                  </em>
+                </span>
+              ))}
+            </div>
+            <aside class="device__cart">
+              <strong>{retail.receipt}</strong>
+              <small>{retail.count}</small>
+              <span class="device__line">
+                <b>{retail.products[0].name}</b>
+                <b>
+                  {retail.products[0].price} {retail.unit}
+                </b>
+              </span>
+              <span class="device__sum">
+                <b>{retail.total}</b>
+                <b>
+                  {retail.sum} {retail.unit}
+                </b>
+              </span>
+              <span class="device__pay">{retail.pay}</span>
+            </aside>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  {
+    id === 'fitness' && (
+      <div class="panel crm">
+        <aside class="rail">
+          <i />
+          <i />
+          <i />
+          <i />
+        </aside>
+        <div class="crm__main">
+          <header class="bar">
+            <strong>{copy.plansTitle}</strong>
+            <small>{copy.unit}</small>
+            <span class="pill">{copy.add}</span>
+          </header>
+          <ul>
+            {copy.plans.map((name, index) => (
+              <li>
+                <span>{name}</span>
+                <em>{copy.prices[index]}</em>
+                <i title={copy.status} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .frame {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 12.5rem;
+    padding: 0.85rem;
+  }
+
+  .frame--retail {
+    padding: 0;
+    background: #f7f9fc;
+  }
+
+  .retail {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    padding: 0.85rem 0.9rem;
+    background: #f7f9fc;
+    color: #0b0f14;
+    container-type: inline-size;
+  }
+
+  .retail__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .retail__kicker {
+    color: #087f5b;
+    font-size: clamp(0.62rem, 2.5cqi, 0.82rem);
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  .retail__title {
+    display: flex;
+    flex-direction: column;
+    color: #0b0f14;
+    font-size: clamp(0.92rem, 4.6cqi, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .retail__btn {
+    align-self: flex-start;
+    max-width: 100%;
+    margin-top: 0.15rem;
+    padding: 0.38rem 0.7rem;
+    border-radius: 999px;
+    background: #087f5b;
+    color: #fff;
+    font-size: clamp(0.62rem, 2.4cqi, 0.82rem);
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .device {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #243243;
+    border-radius: 0.85rem;
+    background: #0b0f14;
+    color: #e9eef4;
+    box-shadow: 0 16px 36px rgba(11, 15, 20, 0.16);
+  }
+
+  .device__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+    padding: 0.4rem 0.5rem;
+    background: #151d26;
+    border-bottom: 1px solid #243243;
+  }
+
+  .device__badge {
+    width: 0.85rem;
+    height: 0.85rem;
+    flex: 0 0 auto;
+    border-radius: 0.25rem;
+    background: #169b78;
+  }
+
+  .device__brand {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .device__brand strong,
+  .device__cart > strong {
+    overflow: hidden;
+    color: #e9eef4;
+    font-size: clamp(0.62rem, 2.5cqi, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .device__brand small,
+  .device__cart > small {
+    overflow: hidden;
+    color: #a2b0c0;
+    font-size: clamp(0.52rem, 2cqi, 0.68rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .device__sync {
+    margin-left: auto;
+    overflow: hidden;
+    color: #c9a227;
+    font-size: clamp(0.5rem, 1.9cqi, 0.66rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .device__body {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 0.4rem;
+    min-height: 0;
+    padding: 0.45rem;
+  }
+
+  .device__tiles {
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+  }
+
+  .device__tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    min-width: 0;
+    padding: 0.35rem 0.4rem;
+    border: 1px solid #243243;
+    border-radius: 0.45rem;
+    background: #151d26;
+  }
+
+  .device__tile strong,
+  .device__line b,
+  .device__sum b {
+    overflow: hidden;
+    color: #e9eef4;
+    font-size: clamp(0.58rem, 2.2cqi, 0.75rem);
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .device__tile em {
+    color: #e9eef4;
+    font-style: normal;
+    font-size: clamp(0.52rem, 2cqi, 0.68rem);
+    font-weight: 600;
+  }
+
+  .device__cart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    min-width: 0;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    background: #151d26;
+  }
+
+  .device__line,
+  .device__sum {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .device__line {
+    padding: 0.25rem 0.3rem;
+    border: 1px solid #169b78;
+    border-radius: 0.4rem;
+  }
+
+  .device__sum {
+    margin-top: auto;
+    padding-top: 0.25rem;
+    border-top: 1px solid #243243;
+  }
+
+  .device__pay {
+    display: block;
+    padding: 0.32rem 0.35rem;
+    border-radius: 0.4rem;
+    background: #169b78;
+    color: #fff;
+    font-size: clamp(0.58rem, 2.2cqi, 0.78rem);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  @container (max-width: 520px) {
+    .device__sync {
+      display: none;
+    }
+  }
+
+  .panel {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid rgba(196, 181, 253, 0.28);
+    border-radius: 1rem;
+    background: rgba(10, 3, 20, 0.72);
+    box-shadow: 0 18px 40px rgba(8, 2, 18, 0.28);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .bar strong {
+    overflow: hidden;
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .pill {
+    margin-left: auto;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(52, 211, 153, 0.16);
+    color: #8ef0c8;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .crm em {
+    color: var(--ink);
+    font-style: normal;
+    font-weight: 650;
+    font-size: 0.95rem;
+  }
+
+  .crm small {
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+
+  .crm {
+    flex-direction: row;
+    gap: 0.65rem;
+  }
+
+  .rail {
+    display: flex;
+    flex: 0 0 2.4rem;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.45rem 0.4rem;
+    border-radius: 0.75rem;
+    background: rgba(246, 243, 251, 0.04);
+  }
+
+  .rail i {
+    display: block;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(246, 243, 251, 0.2);
+  }
+
+  .rail i:first-child {
+    background: linear-gradient(90deg, #5b8cff, #e84aff);
+  }
+
+  .crm__main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.55rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .crm ul {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .crm li {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.55rem;
+    border-radius: 0.65rem;
+    background: rgba(246, 243, 251, 0.05);
+  }
+
+  .crm li span {
+    overflow: hidden;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .crm li i {
+    width: 0.45rem;
+    height: 0.45rem;
+    justify-self: end;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+  }
+
+  .crm__main .bar small {
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+
+  .crm .pill {
+    background: rgba(91, 140, 255, 0.2);
+    color: #d7e4ff;
+  }
+</style>

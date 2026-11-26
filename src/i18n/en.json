@@ -131,10 +131,18 @@
         "status": "live"
       },
       {
+        "id": "retail",
+        "name": "ZAIROV Retail",
+        "url": "https://retail.zairov.kg",
+        "text": "Point of sale, stock and an admin desk for retail.",
+        "kind": "Retail and POS",
+        "status": "live"
+      },
+      {
         "id": "fitness",
-        "name": "Fitness studio CRM",
+        "name": "Fitness CRM",
         "url": "",
-        "text": "CRM for a fitness studio: clients, bookings and studio workflows.",
+        "text": "Admin panel for a fitness studio: clients, bookings and studio workflows.",
         "kind": "CRM",
         "status": "internal"
       }

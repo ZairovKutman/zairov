@@ -1,16 +1,19 @@
 ---
-import type { Dictionary } from '../i18n';
+import type { Dictionary, Locale } from '../i18n';
+import Frame from './Frame.astro';
 import SectionIntro from './SectionIntro.astro';
 import Study from './Study.astro';
 
 interface Props {
   t: Dictionary;
+  locale: Locale;
 }
 
-const { t } = Astro.props;
+const { t, locale } = Astro.props;
 const [lead, ...rest] = t.work.items;
 
 const statusLabel = (status: string) => (status === 'internal' ? t.work.statusInternal : t.work.statusLive);
+const isScene = (id: string) => id === 'retail' || id === 'fitness';
 ---
 
 <section class="section" id="cases">
@@ -19,7 +22,11 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
 
     <article class="feature" data-reveal>
       {
-        lead.url ? (
+        isScene(lead.id) ? (
+          <figure class="shot shot--scene">
+            <Frame id={lead.id} locale={locale} />
+          </figure>
+        ) : lead.url ? (
           <figure class="shot">
             <img
               src={`${import.meta.env.BASE_URL}work/${lead.id}.webp`}
@@ -62,7 +69,11 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
       {
         rest.map((item, index) => (
           <article class="work__item" data-reveal style={`--d:${index * 70}ms`}>
-            {item.url ? (
+            {isScene(item.id) ? (
+              <figure class="shot shot--scene">
+                <Frame id={item.id} locale={locale} />
+              </figure>
+            ) : item.url ? (
               <figure class="shot">
                 <img
                   src={`${import.meta.env.BASE_URL}work/${item.id}.webp`}
@@ -180,7 +191,14 @@ const statusLabel = (status: string) => (status === 'internal' ? t.work.statusIn
     margin: 0;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: #0a0314;
+    background:
+      radial-gradient(90% 70% at 100% 0%, rgba(232, 74, 255, 0.16), transparent 55%),
+      radial-gradient(80% 80% at 0% 100%, rgba(91, 140, 255, 0.18), transparent 50%),
+      #12061f;
+  }
+
+  .shot--scene {
+    display: flex;
   }
 
   .shot img {
